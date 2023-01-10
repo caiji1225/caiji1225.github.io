@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>空空</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一、强行改密码法在开机时，按下F8进入“带命令提示符的安全”模式，输入“net user+用户名+123456&#x2F;add”可把某用户的密码强行设置为“123456”二、新增用户法1.在计算机启动时按〔F8〕及选〔Safe Mode With Command Prompt〕2.选〔Administrator〕后便会跳出〔Command Prompt〕的窗口3.用〔Net〕的命令增加一个用户，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="空空">
+<meta property="og:url" content="http://example.com/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81">
+<meta property="og:site_name" content="空空">
+<meta property="og:description" content="一、强行改密码法在开机时，按下F8进入“带命令提示符的安全”模式，输入“net user+用户名+123456&#x2F;add”可把某用户的密码强行设置为“123456”二、新增用户法1.在计算机启动时按〔F8〕及选〔Safe Mode With Command Prompt〕2.选〔Administrator〕后便会跳出〔Command Prompt〕的窗口3.用〔Net〕的命令增加一个用户，">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-09T15:12:29.244Z">
+<meta property="article:modified_time" content="2022-12-15T08:55:48.750Z">
+<meta property="article:author" content="两袖空空">
+<meta property="article:tag" content="笔记 , 研究 , 漏洞">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="空空" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">空空</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">两袖空空的随手记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-强行改开机密码" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.244Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一、强行改密码法<br>在开机时，按下F8进入“带命令提示符的安全”模式，输入“net user+用户名+123456&#x2F;add”可把某用户的密码强行设置为“123456”<br>二、新增用户法1.在计算机启动时按〔F8〕及选〔Safe Mode With Command Prompt〕<br>2.选〔Administrator〕后便会跳出〔Command Prompt〕的窗口<br>3.用〔Net〕的命令增加一个用户，例：增加一个用户名为kudo，命令语法如下：net user kudo&#x2F;add<br>4.将新增用户提升至Administrator的权力，例：提升刚才增加用户〔kudo〕的权力，命令语法如下：net localgroup administrators kudo&#x2F;add<br>5.完成上列步骤后重新启动计算机，在启动画面上便增加了一个用户〔kudo〕了，选〔kudo〕进入计算机<br>6.登入后操作如下：〔控制面板〕→〔用户账户〕→〔删除密码〕→〔重启〕<br>7.在登陆界面中选原来的用户便可不需密码情况下等入(因为已经移除了密码)<br>8.删除刚才新增的用户，在〔控制面板〕→〔用户账户〕→选〔kudo〕，然后选〔删除账户〕便可<br>tips：不适用于忘记安装时所设定〔administrator〕的密码<br>三、飞行模式法<br>1、重新启动Windows XP，在启动画面出现后的瞬间，按F8，选择”带命令行的安全模式”运行。<br>2、运行过程停止时，系统列出了超级用户administrator和本地用户owner的选择菜单，鼠标点击administrator，进入命令行模式。<br>3、键入命令：“net user owner 123456&#x2F;add”，强制性将OWNER用户的口令更改为“123456”。<br>若想在此添加某一用户(如：用户名为abcdef，口令为123456) 的话,请键入“net user abcdef 123456&#x2F;add”,<br>添加后可用“net localgroup administrators abcdef&#x2F;add”命令将用户提升为系统管理组administrators用户,具有超级权限。<br>4.DOS下删C:\windows\system32\config里面的SAM档就可以了。<br>5.开机后按键盘的Delete键进入BIOS界面。找到User Password选项，其默认为关闭状态。启动并输入用户密码(1~8位，英文或者数字)。<br>计算机提示请再输入一遍以确认密码无误，保存退出后重新启动机器，这时就会在开机时出现密码菜单。<br>四、FAT32特殊法<br>如果你是FAT32，进入DOS系统，删除〔C：winntsystem32configsam*.*〕，登陆只要输入administrator不输密码，<br>接着创建一个新的即可。要是NTFS则无效。另外如果你的系统没有加过微软的输入法补丁的话也可以利用输入法的漏洞去做一个管理员权限账号，<br>具体方法如下：开机后，出现登录窗口，显示用户名，并要求输入密码，这时请将输入焦点置于用户名一项，<br>用Ctrl+Shift切换输入法(随便选上一种，只要能出现输入法工具条的就行)。在出现的输入法提示工具条上单击右键，<br>选择帮助，会弹出一个帮助窗口。接下来你需要在这个窗口里找到一个(绿色带下划线)超级链接，并用SHIFT+鼠标左键单击，<br>打开它会弹出一个IE窗口，请在窗口地址栏里输入C：，到这步你应该很清楚怎么做了。只要点击“向上”，会发现你可以进入“控制面板”，接下来该做什么你懂的！<br>五、原账户法<br>我们知道在安装Windows XP过程中，首先是以”administrator”默认登录，然后会要求创建一个新账户，<br>以便进入Windows XP时使用此新建账户登录，而且在Windows XP的登录接口中也只会出现创建的这个用户账号，<br>不会出现”administrator”，但实际上该”administrator”账号还是存在的，并且密码为空。所以小伙伴们可以依据这个条件顺利解开你的计算机锁！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81" data-id="clcpuo20c001j90vp0ujg8ymf" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/apt/sources" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/zzcms%E6%BC%8F%E6%B4%9E" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AV/">AV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Domain/">Domain</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IPC/">IPC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/">Intranet</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/IPC/">IPC</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AV/" rel="tag">AV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Domain/" rel="tag">Domain</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AV/" style="font-size: 10px;">AV</a> <a href="/tags/Domain/" style="font-size: 10px;">Domain</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/book/hexo">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/apt/sources">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/zzcms%E6%BC%8F%E6%B4%9E">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 两袖空空<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

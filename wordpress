@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>空空</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一、关于WP REST APIwordpress已经不仅仅是一个博客网站程序，而是一个强大的CMS系统。开源、完善的社区、丰富的接口等等优势正将wordpress推向更高更广泛的领域。 WP REST API 是wordpress的一个插件，为wordpress提供对外标准的RESTFul接口，随着RESTFul的畅行和各种前端框架的出现，WP REST API可以让wordpress不仅仅存在W">
+<meta property="og:type" content="article">
+<meta property="og:title" content="空空">
+<meta property="og:url" content="http://example.com/wordpress">
+<meta property="og:site_name" content="空空">
+<meta property="og:description" content="一、关于WP REST APIwordpress已经不仅仅是一个博客网站程序，而是一个强大的CMS系统。开源、完善的社区、丰富的接口等等优势正将wordpress推向更高更广泛的领域。 WP REST API 是wordpress的一个插件，为wordpress提供对外标准的RESTFul接口，随着RESTFul的畅行和各种前端框架的出现，WP REST API可以让wordpress不仅仅存在W">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-09T15:12:29.158Z">
+<meta property="article:modified_time" content="2022-09-07T02:31:42.416Z">
+<meta property="article:author" content="两袖空空">
+<meta property="article:tag" content="笔记 , 研究 , 漏洞">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="空空" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">空空</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">两袖空空的随手记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-wordpress" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/wordpress" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.158Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一、关于WP REST API<br>wordpress已经不仅仅是一个博客网站程序，而是一个强大的CMS系统。开源、完善的社区、丰富的接口等等优势正将wordpress推向更高更广泛的领域。</p>
+<p>WP REST API 是wordpress的一个插件，为wordpress提供对外标准的RESTFul接口，随着RESTFul的畅行和各种前端框架的出现，WP REST API可以让wordpress不仅仅存在WEB端，可以让wordpress不仅仅履行一个博客功能，而是可以让wordpress程序作为后台终端（BackEnd），然后以各种应用的形式实现在各种各样的设备中。</p>
+<p>这里引用WP REST API V2 官网（<a target="_blank" rel="noopener" href="http://v2.wp-api.org/%EF%BC%89%E7%9A%84%E4%B8%80%E6%AE%B5%E4%BB%8B%E7%BB%8D%EF%BC%9A">http://v2.wp-api.org/）的一段介绍：</a></p>
+<p>This plugin provides an easy to use REST API, available via HTTP. Grab your site’s data in simple JSON format, including users, posts, taxonomies and more. Retrieving or updating data is as simple as sending a HTTP request.</p>
+<p>WP REST API 最新的是第二个版本（V2），而在wordpress的最新版本4.4中，也已经内置了WP REST API的部分功能和实现，在不久的将来，也许是wordpress 4.5 或 4.6版本中，将会把WP REST API 完全植入。</p>
+<p>非常激动，拭目以待。</p>
+<p>二、WP Rest API 安装与使用<br>既然现在的WP REST API是以一个插件形式存在，那么安装就显得非常简单了。</p>
+<p>直接在wordpress 插件中搜索”WordPress REST API” ，选择安装“WordPress REST API (Version 2) ” ，安装完成后激活。另外，在wordpress后台“设置”》“固定链接”中设置固定连接为“文章名”。</p>
+<p>OK。你的wordpress站点此时就已经有一个可以直接使用的API接口了。WP REST API 默认提供了一套常用的接口，包括文章，页面，文章版本，用户，媒体，文章类型，评论，分类，标签等。</p>
+<p>比如，如果想要获取wordpress中最新的文章，你可以直接在浏览器中输入：</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts">http://www.website.com/wp-json/wp/v2/posts</a></p>
+<p>这时会返回website站点最新的十篇文章。</p>
+<p>如果想获取指定的文章（按文章ID），可以输入：</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts/1">http://www.website.com/wp-json/wp/v2/posts/1</a></p>
+<p>这时可以得到ID为1的文章的详细数据。</p>
+<p>更多的API接口的使用，我们放在本文第三部分讲。</p>
+<p>网址后面的wp-json&#x2F;wp&#x2F;v2一串是是WP REST API自定义的命名空间(namespace)和路由。在目前阶段，我们先不用去管命令空间和路由是什么，先学会操作WP REST API内置给我们使用的这些API接口。这些API接口的参考可以在WP REST API Reference 找到。</p>
+<p>注：本文介绍的是WP REST API V2 版本，wordpress 4.4以上版本</p>
+<p>三、工具<br>在介绍WP REST API 接口前，我们先介绍一个非常有用的工具— Postman。</p>
+<p>Postman是一款功能强大的网页调试与发送网页HTTP请求的工具。Postman在chrome中以插件和应用两种形式同时存在，都是免费下载使用。QQ浏览器中也有Postman插件。只要下载安装插件即可。在进行RESTFull接口相关的开发测试中，Postman可以为你提供极大的方便，强烈推荐使用。</p>
+<p>四、常用WP REST API 接口使用介绍（获取数据）<br>此段介绍WP REST API 常用的获取数据（GET）的接口，提交数据因涉及到较为复杂的认证，此篇文章限于篇幅，后面看情况，再计划出一篇专门的WP REST API认证的文章单独介绍。</p>
+<p>1、文章<br>（1）获取最新文章（默认获取到最新的10篇文章）</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts">http://www.website.com/wp-json/wp/v2/posts</a></p>
+<p>与</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts?page=1">http://www.website.com/wp-json/wp/v2/posts?page=1</a></p>
+<p>效果相同，page用于指定页数，WP REST API 默认返回10条数据，用page指定数据获取的游标。如</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts?page=2">http://www.website.com/wp-json/wp/v2/posts?page=2</a></p>
+<p>可取回最新的第11条数据到第20条数据，以此类推。</p>
+<p>（2）设置获取的每页文章数量及分页</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts?filter%5Bposts_per_page%5D=5">http://www.website.com/wp-json/wp/v2/posts?filter[posts_per_page]=5</a></p>
+<p>filter[posts_per_page]&#x3D;5 用于指定返回文章每页的数量，这里指定每页数量为5篇。</p>
+<p>filter[posts_per_page]与page联合使用：</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts?filter%5Bposts_per_page%5D=5&page=2">http://www.website.com/wp-json/wp/v2/posts?filter[posts_per_page]=5&amp;page=2</a></p>
+<p>（3）获取指定分类的文章</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts?filter%5Bcat%5D=2">http://www.website.com/wp-json/wp/v2/posts?filter[cat]=2</a></p>
+<p>filter[cat]&#x3D;2 指定分类ID为2 ，返回分类ID为2的文章。</p>
+<p>分类ID是每个分类目录在创建时自动生成的ID，在wordpress后台“文章”&#x3D;&#x3D;》“分类目录”中，把鼠标放在分类名称上面，页面下方会出现一个网址，网址中的参数tag_ID&#x3D;2就是这个分类名称的分类ID。如果没有出现网址，可以点击分类名称下的“编辑”，然后查看网页地址栏，同样可以得到tag_ID&#x3D;2。下面的标签ID的获得方法也一样。</p>
+<p>（4）获取指定标签的文章</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts?filter%5Btag%5D=library">http://www.website.com/wp-json/wp/v2/posts?filter[tag]=library</a></p>
+<p>filter[tag]&#x3D;library 指定标签名为“library”的文章</p>
+<p>（5）获取指定分类和有指定标签的文章</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts?filter%5Bcat%5D=2&filter%5Btag%5D=library">http://www.website.com/wp-json/wp/v2/posts?filter[cat]=2&amp;filter[tag]=library</a></p>
+<p>上面两个结合一起，可以得到更具体精确的文章。</p>
+<p>（6）获取指定日期的文章</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts?filter%5Byear%5D=2016&filter%5Bmonthnum%5D=03">http://www.website.com/wp-json/wp/v2/posts?filter[year]=2016&amp;filter[monthnum]=03</a></p>
+<p>filter[year]&#x3D;2016&amp;filter[monthnum]&#x3D;03 设置指定的日期</p>
+<p>（7）获取指定作者的文章</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts?filter%5Bauthor_name%5D=jinyun">http://www.website.com/wp-json/wp/v2/posts?filter[author_name]=jinyun</a></p>
+<p>filter[author_name]&#x3D;jinyun设置指定作者名字</p>
+<p>（8）按关键词搜索文章</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts?filter%5Bs%5D=%E9%87%91%E4%BA%91">http://www.website.com/wp-json/wp/v2/posts?filter[s]=金云</a></p>
+<p>filter[s]&#x3D;金云 ：按给定的关键词搜索文章，返回包含“金云”关键词的文章。</p>
+<p>（9）获取随机文章</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts?filter%5Borderby%5D=rand">http://www.website.com/wp-json/wp/v2/posts?filter[orderby]=rand</a></p>
+<p>其中orderby还可以为指定的字段排序</p>
+<p>（10）获取相关文章</p>
+<p>在网站中，在做SEO优化和页面内容布局时，获取相关文章是比较常见的，可以通过以上几个条件组合来达到获取相关文章的效果。</p>
+<p>按标签获取相关文章：</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts?filter%5Borderby%5D=rand&filter%5Btag%5D=library&filter%5Bposts_per_page%5D=6">http://www.website.com/wp-json/wp/v2/posts?filter[orderby]=rand&amp;filter[tag]=library&amp;filter[posts_per_page]=6</a></p>
+<p>按分类获取相关文章：</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts?filter%5Borderby%5D=rand&filter%5Bcat%5D=2&filter%5Bposts_per_page%5D=6">http://www.website.com/wp-json/wp/v2/posts?filter[orderby]=rand&amp;filter[cat]=2&amp;filter[posts_per_page]=6</a></p>
+<p>（11）获取指定文章的数据</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts/189">http://www.website.com/wp-json/wp/v2/posts/189</a></p>
+<p>得到ID为189的文章数据</p>
+<p>2、分类和标签<br>（1）获取所有的分类</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/categories">http://www.website.com/wp-json/wp/v2/categories</a></p>
+<p>（2）获取指定分类ID的分类信息</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/categories/2">http://www.website.com/wp-json/wp/v2/categories/2</a></p>
+<p>（3）获取所有的标签</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/tags">http://www.website.com/wp-json/wp/v2/tags</a></p>
+<p>（4）获取指定标签ID的标签信息</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/tags/3">http://www.website.com/wp-json/wp/v2/tags/3</a></p>
+<p>3、媒体文件<br>（1）获取所有的媒体信息</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/media">http://www.website.com/wp-json/wp/v2/media</a></p>
+<p>（2）获取指定媒体ID的媒体信息</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/media/17">http://www.website.com/wp-json/wp/v2/media/17</a></p>
+<p>4、页面<br>（1）获取所有的页面信息</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/pages">http://www.website.com/wp-json/wp/v2/pages</a></p>
+<p>（2）获取指定页面ID的页面信息</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/pages/289">http://www.website.com/wp-json/wp/v2/pages/289</a></p>
+<p>5、类型<br>（1）获取当前wordpress所有的内容类型</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/types">http://www.website.com/wp-json/wp/v2/types</a></p>
+<p>一般情况下会返回post,page和attachment三种类型</p>
+<p>（2）获取指定类型</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/types/post">http://www.website.com/wp-json/wp/v2/types/post</a></p>
+<p>6、评论<br>（1）获取所有评论信息</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/comments">http://www.website.com/wp-json/wp/v2/comments</a></p>
+<p>（2）获取指定评论ID的单条评论信息</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/comments/2">http://www.website.com/wp-json/wp/v2/comments/2</a></p>
+<p>7、用户<br>（1）获取所有的用户信息</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/users">http://www.website.com/wp-json/wp/v2/users</a></p>
+<p>（2）获取指定用户ID的用户信息</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/users/1">http://www.website.com/wp-json/wp/v2/users/1</a></p>
+<p>以上即是WP REST API 内置API接口最为常用的接口数据获取方法。</p>
+<p>五、文章数据分析<br>我们在第三部分讲了如何通过各种接口和参数去获取我们想要的东西，而对于获得到的东西，我们还不是十分了解，因此，有必要讲讲我们所获取的JSON数据到底是什么鬼。当然，作为我们只讲其中一种类型的数据即可，其他都是一样的看，无庸置疑，我们当然是讲最为常用的Post。</p>
+<p>我们在使用</p>
+<p><a target="_blank" rel="noopener" href="http://www.website.com/wp-json/wp/v2/posts">http://www.website.com/wp-json/wp/v2/posts</a></p>
+<p>获取数据时，可以看到返回结果是一个数组。这种API我叫它为“集合型”API，类似的有，users,comments,categories,tags,types,media,pages等。</p>
+<p>而当我们加上具体的ID后，如</p>
+<p><a target="_blank" rel="noopener" href="http://www.fymedia.tk/wp-json/wp/v2/posts/189">http://www.fymedia.tk/wp-json/wp/v2/posts/189</a></p>
+<p>返回的是一个JSON对象，里面就是这篇文章的所有信息。类似地，users,comments,categories,tags,types,media,pages等也同样。“集合型”API返回的是这些单个JSON对象的集合。认清这一点，对我们使用第三方框架进行WP REST API 扩展开发非常重要。</p>
+<p>下面，我们就来看一下一篇文章的JSON数据，上面的请求返回结果如下：</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/wordpress" data-id="clcpuo20a001f90vpdyz8ckkm" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/ZimbraNote" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/wmic" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AV/">AV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Domain/">Domain</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IPC/">IPC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/">Intranet</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/IPC/">IPC</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AV/" rel="tag">AV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Domain/" rel="tag">Domain</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AV/" style="font-size: 10px;">AV</a> <a href="/tags/Domain/" style="font-size: 10px;">Domain</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/book/hexo">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/apt/sources">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/zzcms%E6%BC%8F%E6%B4%9E">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 两袖空空<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

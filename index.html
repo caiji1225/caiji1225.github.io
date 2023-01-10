@@ -80,7 +80,7 @@
   
     <article id="post-book/博客搭建" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/01/09/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="article-date">
+    <a href="/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA" class="article-date">
   <time class="dt-published" datetime="2023-01-09T15:12:29.292Z" itemprop="datePublished">2023-01-09</time>
 </a>
     
@@ -98,7 +98,7 @@
 <p>这里使用<br>nodejs + hexo + Github OS：本地windows</p>
 <p>1、Github 注册一个账户<br>    github命令		<br>        echo “# hello” &gt;&gt; README.md<br>        git init<br>        git add README.md<br>        git commit -m “first commit”<br>        git branch -M main<br>        git remote add origin <a target="_blank" rel="noopener" href="https://github.com/caiji1225/hello.git">https://github.com/caiji1225/hello.git</a><br>        git push -u origin main<br>        …or push an existing repository from the command line<br>        git remote add origin <a target="_blank" rel="noopener" href="https://github.com/caiji1225/hello.git">https://github.com/caiji1225/hello.git</a><br>        git branch -M main<br>        git push -u origin main</p>
 <p>2、下载Git<br>    1、双击Git.2.39.0.2.exe安装，next<br>    2、路径选择默认或者自定义，next<br>    3、一直默认，直至完成<br>    鼠标右击，选择 git Bash ，输入git 回显即可<br>    4、生成SSH秘钥（id_rsa）和公钥（id_rsa.pub）<br>        ssh-keygen -t rsa #使用RSA算法生成秘钥 默认回车四次<br>        文件路径为：<br>            Linux：~&#x2F;.ssh<br>            Windows: C:\user\xxx.ssh\</p>
-<p>3、Git 绑定Github用户<br>    1、打开github.com 登录<br>    2、点击 用户头像 选择 Settings<br>    3、左侧点击 SSH andGPG keys &#x3D;》New SSH key &#x3D;》复制的公钥（id_rsa.pub）内容到Key  &#x3D;》 点击Add SSH Key 完成配置<br>    4、Git Bash 里 执行 ssh -T <a href="mailto:&#x67;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#x63;&#x6f;&#x6d;">&#x67;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#x63;&#x6f;&#x6d;</a>  第一次执行需要输入 yes 确认，出现successfully 即为成功。<br>    5、提交文件（两种方式）<br>        1、本地没有git仓库<br>            1、将远程仓库 clone 到本地<br>                git clone <a target="_blank" rel="noopener" href="https://github.com/xxx/Demo.git">https://github.com/xxx/Demo.git</a><br>            2、将文件添加并commit到本地仓库<br>                echo “text1234” &gt;text.txt<br>                git status  #查看仓库状态<br>                git add text.txt  #使用该命令田间道 临时缓冲区<br>                git cimmit -m “备注信息”   #提交到本地仓库 #第一次提交 需要配置用户名 和邮箱<br>                git config –global user.mail “<a href="mailto:&#x63;&#97;&#x69;&#x6a;&#105;&#x31;&#50;&#x32;&#x35;&#x40;&#x31;&#x36;&#x33;&#46;&#x63;&#111;&#109;">&#x63;&#97;&#x69;&#x6a;&#105;&#x31;&#50;&#x32;&#x35;&#x40;&#x31;&#x36;&#x33;&#46;&#x63;&#111;&#109;</a>“<br>                git config –global user.name “caiji1225”<br>                git log #查看日志<br>                git status  #查看状态<br>            3、本地仓库内容push到远程仓库<br>                git push origin master  #推送本地仓库到远程仓库<br>        2、本地有git仓库，并且多次commit操作<br>            1、建立一个本地仓库，进入 init进行初始化<br>                cd D:\code\gitbook\Demo<br>                git init<br>            2、关联远程仓库<br>                git remote add origin <a target="_blank" rel="noopener" href="https://github.com/caiji1225/Demo.git">https://github.com/caiji1225/Demo.git</a><br>            3、同步远程仓库和本地仓库<br>                git pull origin master<br>            4、本地仓库内容push到远程仓库<br>                git add filename<br>                git commit<br>                git push origin master<br>4、nodejs<br>    1、下载链接<br>        <a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a><br>        1、双击运行，一直next<br>        2、安装路径默认或者是自定义 ，next （下面的路径是自定义）<br>        3、Add to PATH 选择第一个或者第二个，继续next<br>        4、 直到  Finish<br>    2、测试安装（cmd下）<br>        D:&gt;node -v<br>            v18.12.1<br>        D:&gt;npm -v<br>            8.19.2<br>    3、修改全局设置下载node的缓存等文件（使用默认全局和缓存 可以跳过 该修改和新建步骤）<br>        1、在nodejs 文件夹下新建 node_Cache 、node_Global 两文件夹<br>        2、命令行执行<br>            D:&gt;npm config set prefix “D:\software\nodejs\node_global”		#全模块<br>            D:&gt;npm config set cache “D:\software\nodejs\node_cache”		#缓存<br>        3、修改系统变量<br>            1、用户变量下的Path里的 npm路径 修改为：D:\software\nodejs\node_global 路径<br>            2、系统变量下新建 NODE_PATH 添加路径为：D:\Software\nodejs\node_global\node_modules<br>            3、系统变量下Path 里 新建添加 D:\Software\nodejs\node_global 路径<br>            4、点击保存<br>            5、验证：npm install express -g #(-g 全局安装的意思，不加默认下载到当前用户变量下的Path定义目录)<br>            6、错误：1、mkdir 修改当前文件夹权限   2、根据错误内容百度即可<br>        4、更换npm源（不更换源，有时候得扶墙）<br>            1、查看初始npm源，如图：<br>                npm config get registry<br>                    <a target="_blank" rel="noopener" href="https://registry.npmjs.org/">https://registry.npmjs.org/</a><br>            2、更换镜像为淘宝镜像<br>                npm config set registry <a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org/</a><br>            3、检查配置是否成功<br>                npm config get registry<br>            4、安装cnpm （npm在海外，响应慢，cnpm 淘宝提供，同步更新，10分钟延迟，响应快）<br>                1、全局安装基于淘宝源的cnpm<br>                    npm install -g cnpm –registry&#x3D;<a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a><br>                2、下载完后，我们在本地全局文件夹下就能看到cnpm模块<br>                3、执行命令查看cnpm是否回显代表着是否安装成功  或者是在文件夹下能看见该文件夹<br>                    cnpm -v</p>
+<p>3、Git 绑定Github用户<br>    1、打开github.com 登录<br>    2、点击 用户头像 选择 Settings<br>    3、左侧点击 SSH andGPG keys &#x3D;》New SSH key &#x3D;》复制的公钥（id_rsa.pub）内容到Key  &#x3D;》 点击Add SSH Key 完成配置<br>    4、Git Bash 里 执行 ssh -T <a href="mailto:&#103;&#105;&#116;&#64;&#103;&#105;&#116;&#104;&#x75;&#98;&#x2e;&#x63;&#111;&#109;">&#103;&#105;&#116;&#64;&#103;&#105;&#116;&#104;&#x75;&#98;&#x2e;&#x63;&#111;&#109;</a>  第一次执行需要输入 yes 确认，出现successfully 即为成功。<br>    5、提交文件（两种方式）<br>        1、本地没有git仓库<br>            1、将远程仓库 clone 到本地<br>                git clone <a target="_blank" rel="noopener" href="https://github.com/xxx/Demo.git">https://github.com/xxx/Demo.git</a><br>            2、将文件添加并commit到本地仓库<br>                echo “text1234” &gt;text.txt<br>                git status  #查看仓库状态<br>                git add text.txt  #使用该命令田间道 临时缓冲区<br>                git cimmit -m “备注信息”   #提交到本地仓库 #第一次提交 需要配置用户名 和邮箱<br>                git config –global user.mail “<a href="mailto:&#x63;&#x61;&#105;&#106;&#105;&#x31;&#x32;&#x32;&#53;&#x40;&#49;&#54;&#51;&#46;&#99;&#111;&#x6d;">&#x63;&#x61;&#105;&#106;&#105;&#x31;&#x32;&#x32;&#53;&#x40;&#49;&#54;&#51;&#46;&#99;&#111;&#x6d;</a>“<br>                git config –global user.name “caiji1225”<br>                git log #查看日志<br>                git status  #查看状态<br>            3、本地仓库内容push到远程仓库<br>                git push origin master  #推送本地仓库到远程仓库<br>        2、本地有git仓库，并且多次commit操作<br>            1、建立一个本地仓库，进入 init进行初始化<br>                cd D:\code\gitbook\Demo<br>                git init<br>            2、关联远程仓库<br>                git remote add origin <a target="_blank" rel="noopener" href="https://github.com/caiji1225/Demo.git">https://github.com/caiji1225/Demo.git</a><br>            3、同步远程仓库和本地仓库<br>                git pull origin master<br>            4、本地仓库内容push到远程仓库<br>                git add filename<br>                git commit<br>                git push origin master<br>4、nodejs<br>    1、下载链接<br>        <a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a><br>        1、双击运行，一直next<br>        2、安装路径默认或者是自定义 ，next （下面的路径是自定义）<br>        3、Add to PATH 选择第一个或者第二个，继续next<br>        4、 直到  Finish<br>    2、测试安装（cmd下）<br>        D:&gt;node -v<br>            v18.12.1<br>        D:&gt;npm -v<br>            8.19.2<br>    3、修改全局设置下载node的缓存等文件（使用默认全局和缓存 可以跳过 该修改和新建步骤）<br>        1、在nodejs 文件夹下新建 node_Cache 、node_Global 两文件夹<br>        2、命令行执行<br>            D:&gt;npm config set prefix “D:\software\nodejs\node_global”		#全模块<br>            D:&gt;npm config set cache “D:\software\nodejs\node_cache”		#缓存<br>        3、修改系统变量<br>            1、用户变量下的Path里的 npm路径 修改为：D:\software\nodejs\node_global 路径<br>            2、系统变量下新建 NODE_PATH 添加路径为：D:\Software\nodejs\node_global\node_modules<br>            3、系统变量下Path 里 新建添加 D:\Software\nodejs\node_global 路径<br>            4、点击保存<br>            5、验证：npm install express -g #(-g 全局安装的意思，不加默认下载到当前用户变量下的Path定义目录)<br>            6、错误：1、mkdir 修改当前文件夹权限   2、根据错误内容百度即可<br>        4、更换npm源（不更换源，有时候得扶墙）<br>            1、查看初始npm源，如图：<br>                npm config get registry<br>                    <a target="_blank" rel="noopener" href="https://registry.npmjs.org/">https://registry.npmjs.org/</a><br>            2、更换镜像为淘宝镜像<br>                npm config set registry <a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org/</a><br>            3、检查配置是否成功<br>                npm config get registry<br>            4、安装cnpm （npm在海外，响应慢，cnpm 淘宝提供，同步更新，10分钟延迟，响应快）<br>                1、全局安装基于淘宝源的cnpm<br>                    npm install -g cnpm –registry&#x3D;<a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a><br>                2、下载完后，我们在本地全局文件夹下就能看到cnpm模块<br>                3、执行命令查看cnpm是否回显代表着是否安装成功  或者是在文件夹下能看见该文件夹<br>                    cnpm -v</p>
 <p>5、通过npm 安装 hexo 博客框架，本地生成博客<br>    1、在安装之前 在github 先建一个仓库 名为：用户名.github.io<br>    2、安装hexo<br>        npm install hexo-cli -g  #全局安装Hexo<br>        cd D:\code\gitbook\blog<br>        hexo init blog 		#初始化博客<br>        npm install<br>        hexo server<br>        hexo g		#静态部署  生成静态文件到默认设置的public文件夹(hexo generate 缩写)<br>        hexo d		#自动生成网站静态文件，并部署到设定的仓库（dexo deploy 缩写）<br>        hexo clean #清除缓存文件db.json 和已生成的静态文件public<br>        hxo s		#查看部署信息<br>        <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a> 查看你页面信息<br>    3、本地Hexo博客同步到 github<br>        1、回到blog 文件夹下<br>        2、打开 __config.yml 修改配置<br>            原配置<br>                # Deployment<br>                ## Docs: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment">https://hexo.io/docs/one-command-deployment</a><br>                deploy:<br>                  type: ‘’<br>            修改后配置<br>                # Deployment<br>                ## Docs: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment">https://hexo.io/docs/one-command-deployment</a><br>                deploy:<br>                  type: git<br>                  repository: <a target="_blank" rel="noopener" href="https://github.com/caiji1225/caiji1225.github.io.git">https://github.com/caiji1225/caiji1225.github.io.git</a><br>                  branch:master</p>
 <pre><code>    3、回到blog文件夹 打开Git Bash
         1、执行：
@@ -118,7 +118,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" data-id="clcoy0fhv0010d4vp3ogcgytn" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA" data-id="clcpuo20i001z90vp6iyg3ed0" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -132,7 +132,7 @@
   
     <article id="post-book/hexo" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/01/09/book/hexo/" class="article-date">
+    <a href="/book/hexo" class="article-date">
   <time class="dt-published" datetime="2023-01-09T15:12:29.287Z" itemprop="datePublished">2023-01-09</time>
 </a>
     
@@ -151,7 +151,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/book/hexo/" data-id="clcoy0fhv000zd4vpblikam2j" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/book/hexo" data-id="clcpuo20i001y90vp3ui58r1c" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -165,7 +165,7 @@
   
     <article id="post-apt/sources" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/01/09/apt/sources/" class="article-date">
+    <a href="/apt/sources" class="article-date">
   <time class="dt-published" datetime="2023-01-09T15:12:29.278Z" itemprop="datePublished">2023-01-09</time>
 </a>
     
@@ -183,7 +183,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/apt/sources/" data-id="clcoy0fn9001dd4vp9mo25fn2" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/apt/sources" data-id="clcpuo20h001x90vp99qpaujs" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -197,7 +197,7 @@
   
     <article id="post-强行改开机密码" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/01/09/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81/" class="article-date">
+    <a href="/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81" class="article-date">
   <time class="dt-published" datetime="2023-01-09T15:12:29.244Z" itemprop="datePublished">2023-01-09</time>
 </a>
     
@@ -212,7 +212,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81/" data-id="clcoy0fph001fd4vp1kke9m27" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81" data-id="clcpuo20c001j90vp0ujg8ymf" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -226,7 +226,7 @@
   
     <article id="post-zzcms漏洞" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/01/09/zzcms%E6%BC%8F%E6%B4%9E/" class="article-date">
+    <a href="/zzcms%E6%BC%8F%E6%B4%9E" class="article-date">
   <time class="dt-published" datetime="2023-01-09T15:12:29.227Z" itemprop="datePublished">2023-01-09</time>
 </a>
     
@@ -250,7 +250,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/zzcms%E6%BC%8F%E6%B4%9E/" data-id="clcoy0fly001ad4vpdepue7rf" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/zzcms%E6%BC%8F%E6%B4%9E" data-id="clcpuo20a001g90vphe1zb0x2" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -264,7 +264,7 @@
   
     <article id="post-zzcms环境配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/01/09/zzcms%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="article-date">
+    <a href="/zzcms%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE" class="article-date">
   <time class="dt-published" datetime="2023-01-09T15:12:29.197Z" itemprop="datePublished">2023-01-09</time>
 </a>
     
@@ -319,7 +319,7 @@ Apply=&gt;OK
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/zzcms%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-id="clcoy0fo3001ed4vpf221e5j1" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/zzcms%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE" data-id="clcpuo20b001i90vp8zmmh2bt" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -333,7 +333,7 @@ Apply=&gt;OK
   
     <article id="post-ZimbraNote" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/01/09/ZimbraNote/" class="article-date">
+    <a href="/ZimbraNote" class="article-date">
   <time class="dt-published" datetime="2023-01-09T15:12:29.181Z" itemprop="datePublished">2023-01-09</time>
 </a>
     
@@ -457,16 +457,16 @@ Apply=&gt;OK
   24) Install UI (zimbra,zimbraAdmin webapps): yes
 </code></pre>
 <p>选择 4<br>    Select, or ‘r’ for previous menu [r] 4</p>
-<p>设置密码<br>    Password for <a href="mailto:&#97;&#x64;&#x6d;&#105;&#110;&#64;&#116;&#101;&#115;&#116;&#46;&#99;&#111;&#x6d;">&#97;&#x64;&#x6d;&#105;&#110;&#64;&#116;&#101;&#115;&#116;&#46;&#99;&#111;&#x6d;</a> (min 6 characters): [wzYXRCHZ9]123456@QJADG&amp;du<br>    Store configuration</p>
+<p>设置密码<br>    Password for <a href="mailto:&#x61;&#x64;&#x6d;&#x69;&#110;&#64;&#x74;&#x65;&#x73;&#116;&#x2e;&#x63;&#111;&#x6d;">&#x61;&#x64;&#x6d;&#x69;&#110;&#64;&#x74;&#x65;&#x73;&#116;&#x2e;&#x63;&#111;&#x6d;</a> (min 6 characters): [wzYXRCHZ9]123456@QJADG&amp;du<br>    Store configuration</p>
 <ol>
 <li>Status:                                  Enabled</li>
 <li>Create Admin User:                       yes</li>
-<li>Admin user to create:                    <a href="mailto:&#97;&#100;&#x6d;&#x69;&#x6e;&#64;&#x74;&#101;&#115;&#116;&#46;&#99;&#111;&#109;">&#97;&#100;&#x6d;&#x69;&#x6e;&#64;&#x74;&#101;&#115;&#116;&#46;&#99;&#111;&#109;</a></li>
+<li>Admin user to create:                    <a href="mailto:&#97;&#100;&#x6d;&#x69;&#x6e;&#x40;&#116;&#101;&#115;&#116;&#x2e;&#99;&#x6f;&#x6d;">&#97;&#100;&#x6d;&#x69;&#x6e;&#x40;&#116;&#101;&#115;&#116;&#x2e;&#99;&#x6f;&#x6d;</a></li>
 <li>Admin Password                           set</li>
-<li>Anti-virus quarantine user:              <a href="mailto:&#x76;&#x69;&#114;&#117;&#115;&#45;&#113;&#117;&#x61;&#114;&#x61;&#110;&#x74;&#x69;&#x6e;&#x65;&#46;&#x73;&#x6c;&#97;&#122;&#98;&#117;&#x77;&#x63;&#64;&#x74;&#x65;&#x73;&#x74;&#46;&#99;&#x6f;&#109;">&#x76;&#x69;&#114;&#117;&#115;&#45;&#113;&#117;&#x61;&#114;&#x61;&#110;&#x74;&#x69;&#x6e;&#x65;&#46;&#x73;&#x6c;&#97;&#122;&#98;&#117;&#x77;&#x63;&#64;&#x74;&#x65;&#x73;&#x74;&#46;&#99;&#x6f;&#109;</a></li>
+<li>Anti-virus quarantine user:              <a href="mailto:&#x76;&#x69;&#x72;&#x75;&#115;&#45;&#113;&#x75;&#97;&#x72;&#x61;&#110;&#x74;&#x69;&#x6e;&#x65;&#46;&#x73;&#108;&#x61;&#122;&#98;&#117;&#119;&#x63;&#64;&#116;&#101;&#x73;&#x74;&#46;&#99;&#x6f;&#109;">&#x76;&#x69;&#x72;&#x75;&#115;&#45;&#113;&#x75;&#97;&#x72;&#x61;&#110;&#x74;&#x69;&#x6e;&#x65;&#46;&#x73;&#108;&#x61;&#122;&#98;&#117;&#119;&#x63;&#64;&#116;&#101;&#x73;&#x74;&#46;&#99;&#x6f;&#109;</a></li>
 <li>Enable automated spam training:          yes</li>
-<li>Spam training user:                      <a href="mailto:&#x73;&#112;&#97;&#x6d;&#46;&#x6e;&#105;&#x74;&#x66;&#x63;&#x34;&#116;&#x34;&#x40;&#116;&#101;&#115;&#x74;&#x2e;&#99;&#111;&#x6d;">&#x73;&#112;&#97;&#x6d;&#46;&#x6e;&#105;&#x74;&#x66;&#x63;&#x34;&#116;&#x34;&#x40;&#116;&#101;&#115;&#x74;&#x2e;&#99;&#111;&#x6d;</a></li>
-<li>Non-spam(Ham) training user:             <a href="mailto:&#x68;&#x61;&#x6d;&#46;&#100;&#x74;&#115;&#x73;&#52;&#50;&#x64;&#x35;&#64;&#x74;&#101;&#115;&#x74;&#46;&#99;&#111;&#109;">&#x68;&#x61;&#x6d;&#46;&#100;&#x74;&#115;&#x73;&#52;&#50;&#x64;&#x35;&#64;&#x74;&#101;&#115;&#x74;&#46;&#99;&#111;&#109;</a></li>
+<li>Spam training user:                      <a href="mailto:&#x73;&#x70;&#x61;&#109;&#x2e;&#x6e;&#x69;&#x74;&#x66;&#99;&#x34;&#x74;&#52;&#x40;&#x74;&#101;&#115;&#x74;&#46;&#x63;&#111;&#109;">&#x73;&#x70;&#x61;&#109;&#x2e;&#x6e;&#x69;&#x74;&#x66;&#99;&#x34;&#x74;&#52;&#x40;&#x74;&#101;&#115;&#x74;&#46;&#x63;&#111;&#109;</a></li>
+<li>Non-spam(Ham) training user:             <a href="mailto:&#x68;&#97;&#109;&#x2e;&#x64;&#116;&#115;&#115;&#52;&#50;&#100;&#53;&#64;&#x74;&#x65;&#115;&#x74;&#x2e;&#99;&#111;&#109;">&#x68;&#97;&#109;&#x2e;&#x64;&#116;&#115;&#115;&#52;&#50;&#100;&#53;&#64;&#x74;&#x65;&#115;&#x74;&#x2e;&#99;&#111;&#109;</a></li>
 <li>SMTP host:                               test.com</li>
 <li>Web server HTTP port:                    8080</li>
 <li>Web server HTTPS port:                   8443</li>
@@ -479,8 +479,8 @@ Apply=&gt;OK
 <li>Spell server URL:                        <a target="_blank" rel="noopener" href="http://test.com:7780/aspell.php">http://test.com:7780/aspell.php</a></li>
 <li>Enable version update checks:            TRUE</li>
 <li>Enable version update notifications:     TRUE</li>
-<li>Version update notification email:       <a href="mailto:&#x61;&#100;&#109;&#105;&#x6e;&#x40;&#x74;&#x65;&#115;&#116;&#x2e;&#x63;&#x6f;&#x6d;">&#x61;&#100;&#109;&#105;&#x6e;&#x40;&#x74;&#x65;&#115;&#116;&#x2e;&#x63;&#x6f;&#x6d;</a></li>
-<li>Version update source email:             <a href="mailto:&#97;&#x64;&#x6d;&#105;&#x6e;&#x40;&#116;&#101;&#x73;&#x74;&#46;&#99;&#x6f;&#109;">&#97;&#x64;&#x6d;&#105;&#x6e;&#x40;&#116;&#101;&#x73;&#x74;&#46;&#99;&#x6f;&#109;</a></li>
+<li>Version update notification email:       <a href="mailto:&#x61;&#x64;&#109;&#105;&#110;&#64;&#x74;&#x65;&#115;&#x74;&#46;&#x63;&#111;&#x6d;">&#x61;&#x64;&#109;&#105;&#110;&#64;&#x74;&#x65;&#115;&#x74;&#46;&#x63;&#111;&#x6d;</a></li>
+<li>Version update source email:             <a href="mailto:&#x61;&#100;&#x6d;&#x69;&#110;&#x40;&#116;&#x65;&#x73;&#x74;&#x2e;&#x63;&#111;&#109;">&#x61;&#100;&#x6d;&#x69;&#110;&#x40;&#116;&#x65;&#x73;&#x74;&#x2e;&#x63;&#111;&#109;</a></li>
 <li>Install mailstore (service webapp):      yes</li>
 <li>Install UI (zimbra,zimbraAdmin webapps): yes<br>Select, or ‘r’ for previous menu [r] r</li>
 </ol>
@@ -560,7 +560,7 @@ root@test:/tools/zcs8.8.15#
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/ZimbraNote/" data-id="clcoy0fkp0018d4vphbhhaiip" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/ZimbraNote" data-id="clcpuo1zu000e90vp7e31htws" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -574,7 +574,7 @@ root@test:/tools/zcs8.8.15#
   
     <article id="post-wordpress" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/01/09/wordpress/" class="article-date">
+    <a href="/wordpress" class="article-date">
   <time class="dt-published" datetime="2023-01-09T15:12:29.158Z" itemprop="datePublished">2023-01-09</time>
 </a>
     
@@ -690,7 +690,7 @@ root@test:/tools/zcs8.8.15#
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/wordpress/" data-id="clcoy0fmu001cd4vp1ey3euvw" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/wordpress" data-id="clcpuo20a001f90vpdyz8ckkm" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -704,7 +704,7 @@ root@test:/tools/zcs8.8.15#
   
     <article id="post-wmic" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/01/09/wmic/" class="article-date">
+    <a href="/wmic" class="article-date">
   <time class="dt-published" datetime="2023-01-09T15:12:29.155Z" itemprop="datePublished">2023-01-09</time>
 </a>
     
@@ -727,7 +727,7 @@ root@test:/tools/zcs8.8.15#
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/wmic/" data-id="clcoy0fjt0016d4vp3rdz6hg1" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/wmic" data-id="clcpuo20b001h90vp8v0t5gp5" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -741,7 +741,7 @@ root@test:/tools/zcs8.8.15#
   
     <article id="post-windows激活" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/01/09/windows%E6%BF%80%E6%B4%BB/" class="article-date">
+    <a href="/windows%E6%BF%80%E6%B4%BB" class="article-date">
   <time class="dt-published" datetime="2023-01-09T15:12:29.139Z" itemprop="datePublished">2023-01-09</time>
 </a>
     
@@ -758,7 +758,7 @@ root@test:/tools/zcs8.8.15#
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/windows%E6%BF%80%E6%B4%BB/" data-id="clcoy0fmd001bd4vpf90p96i8" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/windows%E6%BF%80%E6%B4%BB" data-id="clcpuo209001d90vpcj398zli" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -827,23 +827,23 @@ root@test:/tools/zcs8.8.15#
       <ul>
         
           <li>
-            <a href="/2023/01/09/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">(no title)</a>
+            <a href="/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA">(no title)</a>
           </li>
         
           <li>
-            <a href="/2023/01/09/book/hexo/">(no title)</a>
+            <a href="/book/hexo">(no title)</a>
           </li>
         
           <li>
-            <a href="/2023/01/09/apt/sources/">(no title)</a>
+            <a href="/apt/sources">(no title)</a>
           </li>
         
           <li>
-            <a href="/2023/01/09/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81/">(no title)</a>
+            <a href="/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81">(no title)</a>
           </li>
         
           <li>
-            <a href="/2023/01/09/zzcms%E6%BC%8F%E6%B4%9E/">(no title)</a>
+            <a href="/zzcms%E6%BC%8F%E6%B4%9E">(no title)</a>
           </li>
         
       </ul>

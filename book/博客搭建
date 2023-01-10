@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>空空</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="个人博客的搭建框架1.hexo：https:&#x2F;&#x2F;hexo.io&#x2F;    Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。    Hexo的主题样式也有很多好看的，而且github都有star上万的。 2.jekyll：https:&#x2F;&#x2F;jekyllrb.com&#x2F;Jekyll 是一个简单的博客形态的静态站">
+<meta property="og:type" content="article">
+<meta property="og:title" content="空空">
+<meta property="og:url" content="http://example.com/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA">
+<meta property="og:site_name" content="空空">
+<meta property="og:description" content="个人博客的搭建框架1.hexo：https:&#x2F;&#x2F;hexo.io&#x2F;    Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。    Hexo的主题样式也有很多好看的，而且github都有star上万的。 2.jekyll：https:&#x2F;&#x2F;jekyllrb.com&#x2F;Jekyll 是一个简单的博客形态的静态站">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-09T15:12:29.292Z">
+<meta property="article:modified_time" content="2023-01-09T09:20:49.095Z">
+<meta property="article:author" content="两袖空空">
+<meta property="article:tag" content="笔记 , 研究 , 漏洞">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="空空" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">空空</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">两袖空空的随手记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-book/博客搭建" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.292Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>个人博客的搭建框架<br>1.hexo：<a target="_blank" rel="noopener" href="https://hexo.io/">https://hexo.io/</a><br>    Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。<br>    Hexo的主题样式也有很多好看的，而且github都有star上万的。</p>
+<p>2.jekyll：<a target="_blank" rel="noopener" href="https://jekyllrb.com/">https://jekyllrb.com/</a><br>Jekyll 是一个简单的博客形态的静态站点生产机器。<br>它有一个模版目录，其中包含原始文本格式的文档，通过一个转换器（如 Markdown）和我们的 Liquid 渲染器转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。<br>Jekyll 也可以运行在 GitHub Page 上，也就是说，你可以使用 GitHub 的服务来搭建你的项目页面、博客或者网站，而且是完全免费的。</p>
+<p>3.hugo：<a target="_blank" rel="noopener" href="https://www.gohugo.org/">https://www.gohugo.org/</a><br>    Hugo是一种用Go语言编写的快速，现代的静态网站生成器，旨在让网站创建再次变得有趣。</p>
+<p>4.vuepress：<a target="_blank" rel="noopener" href="https://vuepress.vuejs.org/">https://vuepress.vuejs.org/</a><br>    VuePress 由两部分组成：一个以 Vue 驱动的主题系统的简约静态网站生成工具，和一个为编写技术文档而优化的默认主题。<br>    它是为了支持 Vue 子项目的文档需求而创建的。<br>    由 VuePress 生成的每个页面，都具有相应的预渲染静态 HTML，它们能提供出色的加载性能，并且对 SEO 友好。<br>    页面加载之后，Vue 就会将这些静态内容，接管为完整的单页面应用程序(SPA)。<br>    当用户在浏览站点时，可以按需加载其他页面。</p>
+<p>5.solo：<a target="_blank" rel="noopener" href="https://solo.b3log.org/">https://solo.b3log.org/</a><br>    小而美的博客系统，为未来而构建<br>    Solo 是一款小而美的博客系统，专为程序员设计<br>    我们有一个活跃的小众社区，文章可以推送到社区让更多人看到<br>    第一个版本发布于 2010 年，永不断更 !<br>6.wordpress：<a target="_blank" rel="noopener" href="https://wordpress.org/">https://wordpress.org/</a><br>    WordPress是使用PHP语言开发的博客平台，用户可以在支持PHP和MySQL数据库的服务器上架设属于自己的网站。<br>    有着许多第三方开发的免费模板，安装方式简单易用。</p>
+<p>这里使用<br>nodejs + hexo + Github OS：本地windows</p>
+<p>1、Github 注册一个账户<br>    github命令		<br>        echo “# hello” &gt;&gt; README.md<br>        git init<br>        git add README.md<br>        git commit -m “first commit”<br>        git branch -M main<br>        git remote add origin <a target="_blank" rel="noopener" href="https://github.com/caiji1225/hello.git">https://github.com/caiji1225/hello.git</a><br>        git push -u origin main<br>        …or push an existing repository from the command line<br>        git remote add origin <a target="_blank" rel="noopener" href="https://github.com/caiji1225/hello.git">https://github.com/caiji1225/hello.git</a><br>        git branch -M main<br>        git push -u origin main</p>
+<p>2、下载Git<br>    1、双击Git.2.39.0.2.exe安装，next<br>    2、路径选择默认或者自定义，next<br>    3、一直默认，直至完成<br>    鼠标右击，选择 git Bash ，输入git 回显即可<br>    4、生成SSH秘钥（id_rsa）和公钥（id_rsa.pub）<br>        ssh-keygen -t rsa #使用RSA算法生成秘钥 默认回车四次<br>        文件路径为：<br>            Linux：~&#x2F;.ssh<br>            Windows: C:\user\xxx.ssh\</p>
+<p>3、Git 绑定Github用户<br>    1、打开github.com 登录<br>    2、点击 用户头像 选择 Settings<br>    3、左侧点击 SSH andGPG keys &#x3D;》New SSH key &#x3D;》复制的公钥（id_rsa.pub）内容到Key  &#x3D;》 点击Add SSH Key 完成配置<br>    4、Git Bash 里 执行 ssh -T <a href="mailto:&#103;&#105;&#116;&#64;&#103;&#105;&#116;&#104;&#x75;&#98;&#x2e;&#x63;&#111;&#109;">&#103;&#105;&#116;&#64;&#103;&#105;&#116;&#104;&#x75;&#98;&#x2e;&#x63;&#111;&#109;</a>  第一次执行需要输入 yes 确认，出现successfully 即为成功。<br>    5、提交文件（两种方式）<br>        1、本地没有git仓库<br>            1、将远程仓库 clone 到本地<br>                git clone <a target="_blank" rel="noopener" href="https://github.com/xxx/Demo.git">https://github.com/xxx/Demo.git</a><br>            2、将文件添加并commit到本地仓库<br>                echo “text1234” &gt;text.txt<br>                git status  #查看仓库状态<br>                git add text.txt  #使用该命令田间道 临时缓冲区<br>                git cimmit -m “备注信息”   #提交到本地仓库 #第一次提交 需要配置用户名 和邮箱<br>                git config –global user.mail “<a href="mailto:&#x63;&#x61;&#105;&#106;&#105;&#x31;&#x32;&#x32;&#53;&#x40;&#49;&#54;&#51;&#46;&#99;&#111;&#x6d;">&#x63;&#x61;&#105;&#106;&#105;&#x31;&#x32;&#x32;&#53;&#x40;&#49;&#54;&#51;&#46;&#99;&#111;&#x6d;</a>“<br>                git config –global user.name “caiji1225”<br>                git log #查看日志<br>                git status  #查看状态<br>            3、本地仓库内容push到远程仓库<br>                git push origin master  #推送本地仓库到远程仓库<br>        2、本地有git仓库，并且多次commit操作<br>            1、建立一个本地仓库，进入 init进行初始化<br>                cd D:\code\gitbook\Demo<br>                git init<br>            2、关联远程仓库<br>                git remote add origin <a target="_blank" rel="noopener" href="https://github.com/caiji1225/Demo.git">https://github.com/caiji1225/Demo.git</a><br>            3、同步远程仓库和本地仓库<br>                git pull origin master<br>            4、本地仓库内容push到远程仓库<br>                git add filename<br>                git commit<br>                git push origin master<br>4、nodejs<br>    1、下载链接<br>        <a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a><br>        1、双击运行，一直next<br>        2、安装路径默认或者是自定义 ，next （下面的路径是自定义）<br>        3、Add to PATH 选择第一个或者第二个，继续next<br>        4、 直到  Finish<br>    2、测试安装（cmd下）<br>        D:&gt;node -v<br>            v18.12.1<br>        D:&gt;npm -v<br>            8.19.2<br>    3、修改全局设置下载node的缓存等文件（使用默认全局和缓存 可以跳过 该修改和新建步骤）<br>        1、在nodejs 文件夹下新建 node_Cache 、node_Global 两文件夹<br>        2、命令行执行<br>            D:&gt;npm config set prefix “D:\software\nodejs\node_global”		#全模块<br>            D:&gt;npm config set cache “D:\software\nodejs\node_cache”		#缓存<br>        3、修改系统变量<br>            1、用户变量下的Path里的 npm路径 修改为：D:\software\nodejs\node_global 路径<br>            2、系统变量下新建 NODE_PATH 添加路径为：D:\Software\nodejs\node_global\node_modules<br>            3、系统变量下Path 里 新建添加 D:\Software\nodejs\node_global 路径<br>            4、点击保存<br>            5、验证：npm install express -g #(-g 全局安装的意思，不加默认下载到当前用户变量下的Path定义目录)<br>            6、错误：1、mkdir 修改当前文件夹权限   2、根据错误内容百度即可<br>        4、更换npm源（不更换源，有时候得扶墙）<br>            1、查看初始npm源，如图：<br>                npm config get registry<br>                    <a target="_blank" rel="noopener" href="https://registry.npmjs.org/">https://registry.npmjs.org/</a><br>            2、更换镜像为淘宝镜像<br>                npm config set registry <a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org/</a><br>            3、检查配置是否成功<br>                npm config get registry<br>            4、安装cnpm （npm在海外，响应慢，cnpm 淘宝提供，同步更新，10分钟延迟，响应快）<br>                1、全局安装基于淘宝源的cnpm<br>                    npm install -g cnpm –registry&#x3D;<a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a><br>                2、下载完后，我们在本地全局文件夹下就能看到cnpm模块<br>                3、执行命令查看cnpm是否回显代表着是否安装成功  或者是在文件夹下能看见该文件夹<br>                    cnpm -v</p>
+<p>5、通过npm 安装 hexo 博客框架，本地生成博客<br>    1、在安装之前 在github 先建一个仓库 名为：用户名.github.io<br>    2、安装hexo<br>        npm install hexo-cli -g  #全局安装Hexo<br>        cd D:\code\gitbook\blog<br>        hexo init blog 		#初始化博客<br>        npm install<br>        hexo server<br>        hexo g		#静态部署  生成静态文件到默认设置的public文件夹(hexo generate 缩写)<br>        hexo d		#自动生成网站静态文件，并部署到设定的仓库（dexo deploy 缩写）<br>        hexo clean #清除缓存文件db.json 和已生成的静态文件public<br>        hxo s		#查看部署信息<br>        <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a> 查看你页面信息<br>    3、本地Hexo博客同步到 github<br>        1、回到blog 文件夹下<br>        2、打开 __config.yml 修改配置<br>            原配置<br>                # Deployment<br>                ## Docs: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment">https://hexo.io/docs/one-command-deployment</a><br>                deploy:<br>                  type: ‘’<br>            修改后配置<br>                # Deployment<br>                ## Docs: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment">https://hexo.io/docs/one-command-deployment</a><br>                deploy:<br>                  type: git<br>                  repository: <a target="_blank" rel="noopener" href="https://github.com/caiji1225/caiji1225.github.io.git">https://github.com/caiji1225/caiji1225.github.io.git</a><br>                  branch:master</p>
+<pre><code>    3、回到blog文件夹 打开Git Bash
+        1、执行：
+            npm install hexo-deployer-git --save
+        2、分别执行
+            hexo clean   #清除缓存文件 db.json 和已生成的静态文件 public
+            hexo g       #生成网站静态文件到默认设置的 public 文件夹(hexo generate 的缩写)
+            hexo d       #自动生成网站静态文件，并部署到设定的仓库(hexo deploy 的缩写)
+        3、打开浏览器，输入 https://xxx.github.io 就可以打开你的网页了：
+        
+    博客搭建参考：https://zhuanlan.zhihu.com/p/102592286
+    hexo 用法文档：https://hexo.io/zh-cn/docs/configuration	  
+
+            
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA" data-id="clcpuo20i001z90vp6iyg3ed0" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/book/hexo" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AV/">AV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Domain/">Domain</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IPC/">IPC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/">Intranet</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/IPC/">IPC</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AV/" rel="tag">AV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Domain/" rel="tag">Domain</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AV/" style="font-size: 10px;">AV</a> <a href="/tags/Domain/" style="font-size: 10px;">Domain</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/book/hexo">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/apt/sources">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/zzcms%E6%BC%8F%E6%B4%9E">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 两袖空空<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
