@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>空空</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="dnsenum nzsis.govt.nz A 记录	表示域名或者主机名对应的IPV4的记录NS 记录	指定了子域对应的域名服务器MX 记录	是域名与邮件交换服务器的对应记录 此命令会尝试从名字服务器进行完全区域传输，但可能会因为名字服务器对区域传输做限制导致失败在 ：Trying zone Transfers and getting Bind Versions： 显示的内容就是。 区域传送： D">
+<meta property="og:type" content="article">
+<meta property="og:title" content="空空">
+<meta property="og:url" content="http://example.com/2023/01/09/dnsenum/index.html">
+<meta property="og:site_name" content="空空">
+<meta property="og:description" content="dnsenum nzsis.govt.nz A 记录	表示域名或者主机名对应的IPV4的记录NS 记录	指定了子域对应的域名服务器MX 记录	是域名与邮件交换服务器的对应记录 此命令会尝试从名字服务器进行完全区域传输，但可能会因为名字服务器对区域传输做限制导致失败在 ：Trying zone Transfers and getting Bind Versions： 显示的内容就是。 区域传送： D">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-09T15:12:28.463Z">
+<meta property="article:modified_time" content="2022-06-20T09:01:32.714Z">
+<meta property="article:author" content="两袖空空">
+<meta property="article:tag" content="笔记 , 研究 , 漏洞">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="空空" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">空空</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">两袖空空的随手记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-dnsenum" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/dnsenum/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.463Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>dnsenum nzsis.govt.nz</p>
+<p>A 记录	表示域名或者主机名对应的IPV4的记录<br>NS 记录	指定了子域对应的域名服务器<br>MX 记录	是域名与邮件交换服务器的对应记录</p>
+<p>此命令会尝试从名字服务器进行完全区域传输，但可能会因为名字服务器对区域传输做限制导致失败<br>在 ：<br>Trying zone Transfers and getting Bind Versions：</p>
+<p>显示的内容就是。</p>
+<p>区域传送： DNS分为 主、从服务器。从服务器向主服务器查询更新信息，主服务器将本级的区域文件的数据传递给从服务器，此过程称为区域传送<br>区域传送分为<br>    完全区域传送 （AFXR） 和增量区域传送 （IXFR）<br>        AFXR：主服务器将区域文件中的所有数据传递给从服务器<br>        IXFR：主服务器将区域文件中更新的部分传递给从服务器</p>
+<p>查询<br>指定DNS服务器查询<br>dnsenum –dnsserver 114.114.114.114  nzsis.govt.nz<br>    kali 默认服务器在&#x2F;etc&#x2F;resolv.conf 文件中指定<br>    114.114.114.114<br>    8.8.8.8</p>
+<p>–thread 线程</p>
+<p>-t |–timeout 指定TCP或者UDP的超时等待时间 默认10s<br>–nocolor 不设置彩色字体显示结果<br>-v | -verbose 显示查询过程或出错的详细信息</p>
+<p>dns占用53端口，使用TCP或者UDP协议<br>当进行域名解析时，为了使DNS服务器负载更低，响应更快，使用UDP协议；<br>当进行区域传送时，为了保证数据准确性，使用TCP协议</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/dnsenum/" data-id="clcpupani000g5gvp9h2i2ba6" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/01/09/dnsrecon/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/01/09/CHeckra1n/%E6%9C%AA%E8%A7%A3%E9%94%81%E8%BF%9B%E5%85%A5%E6%81%A2%E5%A4%8D%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AV/">AV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Domain/">Domain</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IPC/">IPC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/">Intranet</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/IPC/">IPC</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AV/" rel="tag">AV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Domain/" rel="tag">Domain</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AV/" style="font-size: 10px;">AV</a> <a href="/tags/Domain/" style="font-size: 10px;">Domain</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/01/09/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/book/hexo/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/apt/sources/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/zzcms%E6%BC%8F%E6%B4%9E/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 两袖空空<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

