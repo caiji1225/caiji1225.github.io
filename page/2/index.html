@@ -102,7 +102,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/VPN/" data-id="clcre41jk000kecvp54gnecuz" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/VPN/" data-id="clcre7dtw000jasvp99njb93h" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -185,7 +185,7 @@ deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted unive
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/UpdateSources/" data-id="clcre41jk000jecvpbtl87brr" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/UpdateSources/" data-id="clcre7dtx000kasvp7e8hb7dw" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -219,7 +219,7 @@ deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted unive
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/UbuntuMSF/" data-id="clcre41jj000iecvphmem2bt9" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/UbuntuMSF/" data-id="clcre7dtv000hasvpevqj7bhh" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -243,11 +243,11 @@ deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted unive
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>ssh<br>    ssh协议传输是加密的，内网中很难区分恶意ssh通信，可以建立一些无法建立的TCP连接<br>    防御：限制IP  ssh连接，添加内外双向访问控制策略<br>    使用命令：<br>        ssh  <a href="mailto:&#x72;&#x6f;&#x6f;&#116;&#x40;&#x31;&#x30;&#x2e;&#x31;&#48;&#x2e;&#x38;&#48;&#46;&#49;&#48;&#57;">&#x72;&#x6f;&#x6f;&#116;&#x40;&#x31;&#x30;&#x2e;&#x31;&#48;&#x2e;&#x38;&#48;&#46;&#49;&#48;&#57;</a></p>
+        <p>ssh<br>    ssh协议传输是加密的，内网中很难区分恶意ssh通信，可以建立一些无法建立的TCP连接<br>    防御：限制IP  ssh连接，添加内外双向访问控制策略<br>    使用命令：<br>        ssh  <a href="mailto:&#114;&#x6f;&#111;&#116;&#x40;&#x31;&#x30;&#x2e;&#49;&#48;&#46;&#56;&#x30;&#46;&#x31;&#x30;&#57;">&#114;&#x6f;&#111;&#116;&#x40;&#x31;&#x30;&#x2e;&#49;&#48;&#46;&#56;&#x30;&#46;&#x31;&#x30;&#57;</a></p>
 <p>参数<br>    -C  压缩传输，提高速度<br>    -f  后台执行ssh，不占用当前shell<br>    -N  建立静默连接（建立了连接，但是看不见具体会话）<br>    -g  允许远程主机连接本地用于转发的端口<br>    -L  本地端口转发<br>    -R  远程端口转发<br>    -D  动态转发（Socks代理）<br>    -P  指定ssh端口</p>
-<p>本地转发<br>    (target1：80.107 1.107 做跳板 将target2：1.103 3389 映射到 atck：80.102 4444)<br>    attck<br>        ssh -CfNg  -L 5555:192.168.1.103:3389 <a href="mailto:&#x72;&#111;&#x6f;&#x74;&#64;&#49;&#x30;&#x2e;&#x31;&#48;&#x2e;&#56;&#48;&#x2e;&#49;&#48;&#55;">&#x72;&#111;&#x6f;&#x74;&#64;&#49;&#x30;&#x2e;&#x31;&#48;&#x2e;&#56;&#48;&#x2e;&#49;&#48;&#55;</a><br>        通过 netstat -tulnp | grep “5555” 可以查看 tcp  tcp6 的连接<br>        连接1.103的 3389端口<br>        rdesktop 10.10.80.102:5555 </p>
-<p>远程转发<br>    （target1 80.107 1.107 做跳板，target2：1.103 3389 attck：80.102）<br>    target1：<br>        ssh -CfNg -R 3304:192.168.1.103:3389 <a href="mailto:&#x72;&#x6f;&#x6f;&#x74;&#x40;&#49;&#x30;&#x2e;&#x31;&#x30;&#46;&#56;&#48;&#46;&#x31;&#x30;&#50;">&#x72;&#x6f;&#x6f;&#x74;&#x40;&#49;&#x30;&#x2e;&#x31;&#x30;&#46;&#56;&#48;&#46;&#x31;&#x30;&#50;</a><br>    attck<br>        通过访问attck 3304端口 访问 1.103 的3389端口<br>        rdesktop 127.0.0.1 3304<br>        netstat -tulnp |grep “3304” 可以看到</p>
-<p>动态转发 （建立一个SSH加密的动态的Socks 4|5）的代理隧道<br>    （target1 80.107 1.107 做跳板，target2：1.103 3389 attck：80.102）<br>    attck<br>        ssh-CfNg -D 7788 <a href="mailto:&#114;&#111;&#x6f;&#116;&#64;&#x31;&#x30;&#x2e;&#x31;&#x30;&#x2e;&#56;&#48;&#46;&#49;&#48;&#55;">&#114;&#111;&#x6f;&#116;&#64;&#x31;&#x30;&#x2e;&#x31;&#x30;&#x2e;&#56;&#48;&#46;&#49;&#48;&#55;</a><br>        设置Socks4 代理 就可以访问内网资源了</p>
+<p>本地转发<br>    (target1：80.107 1.107 做跳板 将target2：1.103 3389 映射到 atck：80.102 4444)<br>    attck<br>        ssh -CfNg  -L 5555:192.168.1.103:3389 <a href="mailto:&#114;&#111;&#111;&#116;&#x40;&#x31;&#48;&#46;&#x31;&#48;&#46;&#56;&#48;&#46;&#49;&#x30;&#x37;">&#114;&#111;&#111;&#116;&#x40;&#x31;&#48;&#46;&#x31;&#48;&#46;&#56;&#48;&#46;&#49;&#x30;&#x37;</a><br>        通过 netstat -tulnp | grep “5555” 可以查看 tcp  tcp6 的连接<br>        连接1.103的 3389端口<br>        rdesktop 10.10.80.102:5555 </p>
+<p>远程转发<br>    （target1 80.107 1.107 做跳板，target2：1.103 3389 attck：80.102）<br>    target1：<br>        ssh -CfNg -R 3304:192.168.1.103:3389 <a href="mailto:&#x72;&#111;&#x6f;&#x74;&#64;&#49;&#48;&#46;&#49;&#x30;&#x2e;&#x38;&#x30;&#46;&#x31;&#x30;&#50;">&#x72;&#111;&#x6f;&#x74;&#64;&#49;&#48;&#46;&#49;&#x30;&#x2e;&#x38;&#x30;&#46;&#x31;&#x30;&#50;</a><br>    attck<br>        通过访问attck 3304端口 访问 1.103 的3389端口<br>        rdesktop 127.0.0.1 3304<br>        netstat -tulnp |grep “3304” 可以看到</p>
+<p>动态转发 （建立一个SSH加密的动态的Socks 4|5）的代理隧道<br>    （target1 80.107 1.107 做跳板，target2：1.103 3389 attck：80.102）<br>    attck<br>        ssh-CfNg -D 7788 <a href="mailto:&#114;&#111;&#111;&#116;&#x40;&#49;&#x30;&#x2e;&#x31;&#48;&#46;&#56;&#48;&#x2e;&#x31;&#48;&#55;">&#114;&#111;&#111;&#116;&#x40;&#49;&#x30;&#x2e;&#x31;&#48;&#46;&#56;&#48;&#x2e;&#x31;&#48;&#55;</a><br>        设置Socks4 代理 就可以访问内网资源了</p>
 <p>常见隧道</p>
 <p>网络层：IPV6隧道 ICMP隧道  GRE隧道<br>传输层：TCP隧道  UDP隧道  常见的端口转发工具：LCX  NC<br>应用层：SSH隧道  HTTP隧道 HTTPS隧道  DNS隧道</p>
 <p>HTTP|HTTPS协议<br>    reGeory	Meterpreter tunna等
@@ -261,7 +261,7 @@ deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted unive
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/ssh/" data-id="clcre41k1001becvp97dnc7ch" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/ssh/" data-id="clcre7dua001dasvp6iepf5k0" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -303,7 +303,7 @@ deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted unive
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/sql/" data-id="clcre41k2001decvp8m5dfkrz" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/sql/" data-id="clcre7dua001casvpgr10g3ft" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -385,7 +385,7 @@ shodan paser xxx.xxx.xxx.xxx.json.gz //查看下载下来的数据信息
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/shodan/" data-id="clcre41k1001aecvp1hfkfjlu" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/shodan/" data-id="clcre7du9001aasvpb0z8bojl" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -425,7 +425,7 @@ reGeorg是reDuh的升级版
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/reGeorg/" data-id="clcre41k00017ecvp5ukndj9g" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/reGeorg/" data-id="clcre7du90019asvpe7046x2i" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -462,7 +462,7 @@ pip install pwntools
 apt-get install python3 python3-pip python3-dev git libssl-dev libffi-dev build-essential
 </code></pre>
 <p>手把手教你PWN入门（一）——基础环境准备<br><a target="_blank" rel="noopener" href="https://bbs.pediy.com/thread-259199-1.htm">https://bbs.pediy.com/thread-259199-1.htm</a><br>从零开始入门pwn(二):环境搭建<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51466347/article/details/121851783">https://blog.csdn.net/m0_51466347/article/details/121851783</a></p>
-<p>没有公钥，签名无法验证(Ubuntu18)<br>    apt-key  adv –keyserver keyserver.ubuntu.com  –recv-keys 7638D0442B90D010<br>    Executing: &#x2F;tmp&#x2F;apt-key-gpghome.KBKe2NmvPO&#x2F;gpg.1.sh –keyserver keyserver.ubuntu.com –recv-keys 7638D0442B90D010<br>    gpg: key 7638D0442B90D010: 17 signatures not checked due to missing keys<br>    gpg: 密钥 7638D0442B90D010：公钥“Debian Archive Automatic Signing Key (8&#x2F;jessie) <a href="mailto:&#102;&#x74;&#x70;&#x6d;&#97;&#x73;&#116;&#101;&#114;&#64;&#100;&#101;&#98;&#105;&#97;&#x6e;&#46;&#111;&#x72;&#103;">&#102;&#x74;&#x70;&#x6d;&#97;&#x73;&#116;&#101;&#114;&#64;&#100;&#101;&#98;&#105;&#97;&#x6e;&#46;&#111;&#x72;&#103;</a>”已导入<br>    gpg: 合计被处理的数量：1<br>    gpg:               已导入：1</p>
+<p>没有公钥，签名无法验证(Ubuntu18)<br>    apt-key  adv –keyserver keyserver.ubuntu.com  –recv-keys 7638D0442B90D010<br>    Executing: &#x2F;tmp&#x2F;apt-key-gpghome.KBKe2NmvPO&#x2F;gpg.1.sh –keyserver keyserver.ubuntu.com –recv-keys 7638D0442B90D010<br>    gpg: key 7638D0442B90D010: 17 signatures not checked due to missing keys<br>    gpg: 密钥 7638D0442B90D010：公钥“Debian Archive Automatic Signing Key (8&#x2F;jessie) <a href="mailto:&#102;&#x74;&#x70;&#109;&#x61;&#x73;&#x74;&#x65;&#x72;&#x40;&#100;&#x65;&#x62;&#105;&#97;&#x6e;&#46;&#x6f;&#x72;&#x67;">&#102;&#x74;&#x70;&#109;&#x61;&#x73;&#x74;&#x65;&#x72;&#x40;&#100;&#x65;&#x62;&#105;&#97;&#x6e;&#46;&#x6f;&#x72;&#x67;</a>”已导入<br>    gpg: 合计被处理的数量：1<br>    gpg:               已导入：1</p>
 
         
           <p class="article-more-link">
@@ -472,7 +472,7 @@ apt-get install python3 python3-pip python3-dev git libssl-dev libffi-dev build-
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/PWN/" data-id="clcre41ji000fecvphrji2mtb" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/PWN/" data-id="clcre7dtu000fasvp1wchfmuk" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -514,7 +514,7 @@ apt-get install python3 python3-pip python3-dev git libssl-dev libffi-dev build-
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/PsExec/" data-id="clcre41ji000hecvphsc00nc9" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/PsExec/" data-id="clcre7dtv000iasvp0b0dczcw" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -568,7 +568,7 @@ apt-get install python3 python3-pip python3-dev git libssl-dev libffi-dev build-
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/procdump/" data-id="clcre41k00019ecvp9l6w7bcq" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/procdump/" data-id="clcre7du80018asvpe75g0j1c" data-title="" class="article-share-link">分享</a>
       
       
       
