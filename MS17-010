@@ -103,7 +103,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/MS17-010" data-id="clcre7dtt000easvp5959hz5f" data-title="MS17-010" class="article-share-link">分享</a>
+      <a data-url="http://example.com/MS17-010" data-id="clcrfe75n000g7gvpas6odn5n" data-title="MS17-010" class="article-share-link">分享</a>
       
       
       
@@ -112,6 +112,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/adminbook" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Adminbook
+        
+      </div>
+    </a>
   
   
     <a href="/2023/01/09/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81/" id="article-nav-older" class="article-nav-link-wrap">
@@ -175,6 +184,10 @@
       <ul>
         
           <li>
+            <a href="/adminbook">Adminbook</a>
+          </li>
+        
+          <li>
             <a href="/MS17-010">MS17-010</a>
           </li>
         
@@ -188,10 +201,6 @@
         
           <li>
             <a href="/2023/01/09/zzcms%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2023/01/09/ZimbraNote/">(no title)</a>
           </li>
         
       </ul>

