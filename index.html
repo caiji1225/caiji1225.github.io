@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>空空随笔</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="好记性不如烂笔头，主要用于工作，学习中的随手记录">
+<meta property="og:type" content="website">
+<meta property="og:title" content="空空随笔">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="空空随笔">
+<meta property="og:description" content="好记性不如烂笔头，主要用于工作，学习中的随手记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="两袖空空">
+<meta property="article:tag" content="笔记 , 研究 , 漏洞">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="空空随笔" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">空空随笔</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">随手记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-MS17-010" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/MS17-010" class="article-date">
+  <time class="dt-published" datetime="2023-01-10T06:40:51.000Z" itemprop="datePublished">2023-01-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/MS17-010">MS17-010</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+
+        
+          <p class="article-more-link">
+            <a href="/MS17-010#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/MS17-010" data-id="clcre41jh000eecvpc7v4bfhe" data-title="MS17-010" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-强行改开机密码" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.244Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一、强行改密码法<br>在开机时，按下F8进入“带命令提示符的安全”模式，输入“net user+用户名+123456&#x2F;add”可把某用户的密码强行设置为“123456”<br>二、新增用户法1.在计算机启动时按〔F8〕及选〔Safe Mode With Command Prompt〕<br>2.选〔Administrator〕后便会跳出〔Command Prompt〕的窗口<br>3.用〔Net〕的命令增加一个用户，例：增加一个用户名为kudo，命令语法如下：net user kudo&#x2F;add<br>4.将新增用户提升至Administrator的权力，例：提升刚才增加用户〔kudo〕的权力，命令语法如下：net localgroup administrators kudo&#x2F;add<br>5.完成上列步骤后重新启动计算机，在启动画面上便增加了一个用户〔kudo〕了，选〔kudo〕进入计算机<br>6.登入后操作如下：〔控制面板〕→〔用户账户〕→〔删除密码〕→〔重启〕<br>7.在登陆界面中选原来的用户便可不需密码情况下等入(因为已经移除了密码)<br>8.删除刚才新增的用户，在〔控制面板〕→〔用户账户〕→选〔kudo〕，然后选〔删除账户〕便可<br>tips：不适用于忘记安装时所设定〔administrator〕的密码<br>三、飞行模式法<br>1、重新启动Windows XP，在启动画面出现后的瞬间，按F8，选择”带命令行的安全模式”运行。<br>2、运行过程停止时，系统列出了超级用户administrator和本地用户owner的选择菜单，鼠标点击administrator，进入命令行模式。<br>3、键入命令：“net user owner 123456&#x2F;add”，强制性将OWNER用户的口令更改为“123456”。<br>若想在此添加某一用户(如：用户名为abcdef，口令为123456) 的话,请键入“net user abcdef 123456&#x2F;add”,<br>添加后可用“net localgroup administrators abcdef&#x2F;add”命令将用户提升为系统管理组administrators用户,具有超级权限。<br>4.DOS下删C:\windows\system32\config里面的SAM档就可以了。<br>5.开机后按键盘的Delete键进入BIOS界面。找到User Password选项，其默认为关闭状态。启动并输入用户密码(1~8位，英文或者数字)。<br>计算机提示请再输入一遍以确认密码无误，保存退出后重新启动机器，这时就会在开机时出现密码菜单。<br>四、FAT32特殊法<br>如果你是FAT32，进入DOS系统，删除〔C：winntsystem32configsam*.*〕，登陆只要输入administrator不输密码，<br>接着创建一个新的即可。要是NTFS则无效。另外如果你的系统没有加过微软的输入法补丁的话也可以利用输入法的漏洞去做一个管理员权限账号，<br>具体方法如下：开机后，出现登录窗口，显示用户名，并要求输入密码，这时请将输入焦点置于用户名一项，<br>用Ctrl+Shift切换输入法(随便选上一种，只要能出现输入法工具条的就行)。在出现的输入法提示工具条上单击右键，<br>选择帮助，会弹出一个帮助窗口。接下来你需要在这个窗口里找到一个(绿色带下划线)超级链接，并用SHIFT+鼠标左键单击，<br>打开它会弹出一个IE窗口，请在窗口地址栏里输入C：，到这步你应该很清楚怎么做了。只要点击“向上”，会发现你可以进入“控制面板”，接下来该做什么你懂的！<br>五、原账户法<br>我们知道在安装Windows XP过程中，首先是以”administrator”默认登录，然后会要求创建一个新账户，<br>以便进入Windows XP时使用此新建账户登录，而且在Windows XP的登录接口中也只会出现创建的这个用户账号，<br>不会出现”administrator”，但实际上该”administrator”账号还是存在的，并且密码为空。所以小伙伴们可以依据这个条件顺利解开你的计算机锁！</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81/" data-id="clcre41k6001pecvp6sigh5d1" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-zzcms漏洞" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/zzcms%E6%BC%8F%E6%B4%9E/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.227Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="1、重装漏洞"><a href="#1、重装漏洞" class="headerlink" title="1、重装漏洞"></a>1、重装漏洞</h3><p>产生原因：<br>    1、安装完成后 因为没有删除&#x2F;install 目录<br>    2、安装步骤参数可控，从而可跳过验证步骤</p>
+<p>漏洞点：<br>    &#x2F;install&#x2F;index.php</p>
+<p>利用：<br>    1、通过审查发现在&#x2F;install&#x2F;setp_1.php中存在判断代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">file_exists</span>(<span class="string">&quot;install.lock&quot;</span>))&#123;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;div style=&#x27;padding:30px;&#x27;&gt;安装向导已运行安装过，如需重安装，请删除 /install/install.lock 文件&lt;/div&gt;&quot;</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code>2、在/install/index.php中存在代码
+</code></pre>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$step</span> = <span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;step&#x27;</span>]) ? <span class="variable">$_POST</span>[<span class="string">&#x27;step&#x27;</span>] : <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>可以通过POST传值给step ，使step存在 从而绕过install.lock，实现重装</p>
+<h3 id="2、任意文件删除（CVE-2019-8411）"><a href="#2、任意文件删除（CVE-2019-8411）" class="headerlink" title="2、任意文件删除（CVE-2019-8411）"></a>2、任意文件删除（CVE-2019-8411）</h3><p>漏洞点：<br>    &#x2F;admin&#x2F;dl_data.php</p>
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/zzcms%E6%BC%8F%E6%B4%9E/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/zzcms%E6%BC%8F%E6%B4%9E/" data-id="clcre41k5001lecvph1poeuxs" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-zzcms环境配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/zzcms%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.197Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="zzcms2019-phpstudy"><a href="#zzcms2019-phpstudy" class="headerlink" title="zzcms2019+phpstudy"></a>zzcms2019+phpstudy</h2><h3 id="1、环境搭建"><a href="#1、环境搭建" class="headerlink" title="1、环境搭建"></a>1、环境搭建</h3><p><strong>windows</strong>：</p>
+<p>​	phpstudy</p>
+<p>​		IIS|Apache|Nginx + PHP +MySQL</p>
+<p><strong>Linux|Unix：</strong></p>
+<p>​	Apache + PHP + MySQL  （PHP须在非安全模式下运行）</p>
+<h3 id="zzcms-目录结构"><a href="#zzcms-目录结构" class="headerlink" title="zzcms 目录结构"></a>zzcms 目录结构</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">/install  安装程序的目录  需要写入权限</span><br><span class="line">/admin	默认后台管理目录（可随意改名）</span><br><span class="line">/user	注册用户管理程序存放目录</span><br><span class="line">/skin	用户网站模板存放目录，更多用户模板可从zzcms官网下载</span><br><span class="line">/template	系统模板存放目录，更多系统模板可从官网下载</span><br><span class="line">/inc	系统所用包含文件存放目录</span><br><span class="line">/area	各地区显示文件</span><br><span class="line">/zs	招商程序文件</span><br><span class="line">/pp	品牌</span><br><span class="line">/dl	代理</span><br><span class="line">/zh	展会</span><br><span class="line">/company	企业</span><br><span class="line">/job	招聘</span><br><span class="line">/zx	资讯</span><br><span class="line">/special	专题</span><br><span class="line">/ask	问答</span><br><span class="line">/zt		注册用户展厅页程序</span><br><span class="line">/one	存放单页面，如公司简介页，友情链接等页</span><br><span class="line">/ajax	ajax程序处理页面</span><br><span class="line">/reg	用户注册页面</span><br><span class="line">/<span class="number">3</span>	第三方插件存放目录</span><br><span class="line">/<span class="number">3</span>/ckeditor	CK编辑器程序存放目录</span><br><span class="line">/<span class="number">3</span>/alipay	支付宝</span><br><span class="line">    </span><br><span class="line">../TemporaryFiles 临时文件存放目录</span><br><span class="line">../uploadfiles 上传文件存放目录</span><br><span class="line">../inc 系统所用包含文件存放目录　　</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-1网站搭建步骤"><a href="#1-1网站搭建步骤" class="headerlink" title="1.1网站搭建步骤"></a>1.1网站搭建步骤</h4>
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/zzcms%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/zzcms%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-id="clcre41k6001necvp7xdtawyk" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ZimbraNote" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/ZimbraNote/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.181Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>CVE-2015-1197 </p>
+<p>详情：<br>    是一个目录遍历漏洞：提取包含符号链接的特制存档可能导致文件被放置在文件系统中的任意位置</p>
+<p>CVE-2022-27925 Zimbra任意文件上传漏洞</p>
+<p>简介：<br>    Zimbra提供一套开源协同办公套件包括WebMail，日历，通信录，Web文档管理和创作。<br>    特色在于其采用Ajax技术模仿CS桌面应用软件的风格开发的客户端兼容Firefox,Safari和IE浏览器。<br>详情：<br>    Zimbra Collaboration（又称ZCS）8.8.15和9.0具有mboximport功能，<br>    可接收ZIP存档并从中提取文件，具有管理员权限的认证用户可以将任意文件上传到系统中，<br>    从而导致目录遍历或远程代码执行。<br>    此漏洞已于2022 年3月在8.8.15P31和9.0.0P24中修复，目前已发现被利用。</p>
+<p>影响版本：<br>    ZCS &lt; 8.8.15 patch 33<br>    ZCS &lt; 9.0.0 patch 26</p>
+<p>修复方案：<br>        目前这些漏洞已经修复，受影响用户可升级到Zimbra 8.8.15P33、9.0.0P26或更高版本。</p>
+<p>CVE-2022-41352漏洞</p>
+<p>详情：</p>
+<pre><code>1、Zimbra 在 Ubuntu 20.04 或 18.04 上运行，管理员无需执行任何操作，
+    但 Oracle Linux 8、Red Hat Enterprise Linux 8、Rocky Linux 8 和 CentOS 8 容易受到攻击，应实施解决方法。
+2、在 Zimbra Collaboration (ZCS) 8.8.15 和 9.0 中发现了一个问题。	
+    攻击者可以通过 amavisd 通过 cpio 漏洞（提取到 /opt/zimbra/jetty/webapps/zimbra/public）上传任意文件，
+    这可能导致对任何其他用户帐户的不正确访问。
+</code></pre>
+<p>攻击步骤：<br>    1、攻击者发送一封附有恶意 Tar 存档的电子邮件。<br>    2、收到电子邮件后，Zimbra 将其提交给 Amavis 进行垃圾邮件和恶意软件检查。<br>    3、Amavis 分析电子邮件附件并检查附件档案的内容。它调用 cpio 并触发 CVE-2015-1197。<br>    4、在提取期间，JSP webshel​​l 部署在 webmail 组件使用的公共目录之一上。<br>        攻击者可以浏览到 webshel​​l 以开始在受害机器上执行任意命令。</p>
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/ZimbraNote/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/ZimbraNote/" data-id="clcre41jl000lecvpfvkk5z8x" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-wordpress" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/wordpress/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.158Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一、关于WP REST API<br>wordpress已经不仅仅是一个博客网站程序，而是一个强大的CMS系统。开源、完善的社区、丰富的接口等等优势正将wordpress推向更高更广泛的领域。</p>
+<p>WP REST API 是wordpress的一个插件，为wordpress提供对外标准的RESTFul接口，随着RESTFul的畅行和各种前端框架的出现，WP REST API可以让wordpress不仅仅存在WEB端，可以让wordpress不仅仅履行一个博客功能，而是可以让wordpress程序作为后台终端（BackEnd），然后以各种应用的形式实现在各种各样的设备中。</p>
+<p>这里引用WP REST API V2 官网（<a target="_blank" rel="noopener" href="http://v2.wp-api.org/%EF%BC%89%E7%9A%84%E4%B8%80%E6%AE%B5%E4%BB%8B%E7%BB%8D%EF%BC%9A">http://v2.wp-api.org/）的一段介绍：</a></p>
+<p>This plugin provides an easy to use REST API, available via HTTP. Grab your site’s data in simple JSON format, including users, posts, taxonomies and more. Retrieving or updating data is as simple as sending a HTTP request.</p>
+<p>WP REST API 最新的是第二个版本（V2），而在wordpress的最新版本4.4中，也已经内置了WP REST API的部分功能和实现，在不久的将来，也许是wordpress 4.5 或 4.6版本中，将会把WP REST API 完全植入。</p>
+<p>非常激动，拭目以待。</p>
+<p>二、WP Rest API 安装与使用<br>既然现在的WP REST API是以一个插件形式存在，那么安装就显得非常简单了。</p>
+<p>直接在wordpress 插件中搜索”WordPress REST API” ，选择安装“WordPress REST API (Version 2) ” ，安装完成后激活。另外，在wordpress后台“设置”》“固定链接”中设置固定连接为“文章名”。</p>
+<p>OK。你的wordpress站点此时就已经有一个可以直接使用的API接口了。WP REST API 默认提供了一套常用的接口，包括文章，页面，文章版本，用户，媒体，文章类型，评论，分类，标签等。</p>
+<p>比如，如果想要获取wordpress中最新的文章，你可以直接在浏览器中输入：</p>
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/wordpress/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/wordpress/" data-id="clcre41k5001jecvp1s9s9f68" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-wmic" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/wmic/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.155Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>WMIC<br>    WMI 的全称是 Windows Management Instrumentation，<br>    它出现在所有的 Windows操作系统中<br>    由一组强大的工具集合组成，用于管理本地或远程的 Windows 系统<br>    攻击者使用 wmi 来进行攻击，但 Windows 系统默认不会在日志中记录这些操作，可以做到无日志，<br>    攻击脚本无需写入到磁盘，增加了隐蔽性。<br>    推荐使用 wmic 进行远程执行命令。</p>
+<p>工具说明<br>    1、需要远程系统启动 Windows Management Instrumentation 服务，开放135端口<br>    2、远程系统的本地安全策略的“网络访问: 本地帐户的共享和安全模式”应设为“经典-本地用户以自己的身份验证”<br>    3、wmic 会以管理员权限在远程系统上执行命令<br>    4、防火墙开启将无法连接<br>    5、如果报错 “Invalid Global Switch” ，用双引号把包含-的结点括起来即可正常执行。</p>
+<p>命令</p>
+<pre><code>在远程系统上执行 bat 脚本
+    wmic /node:192.168.17.138 /user:test /password:pass process call create c:\programdata\test.bat
+在远程系统上执行单条命令
+    wmic /node:192.168.17.138 /user:test /password:pass process call create &quot;cmd.exe /c net user test1 !@#123QWE /add &amp;&amp; net localgroup administrators test1 /add
+    
+</code></pre>
+
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/wmic/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/wmic/" data-id="clcre41k4001hecvpckql90re" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-windows激活" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/windows%E6%BF%80%E6%B4%BB/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.139Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>方法一<br>    1、目前针对Win10正式版的永久激活密钥并没有放出，因此如果想享受永久激活服务，则可以通过重复激活180天服务来持续使用正版Win10系统。<br>    2、在此与大家分享一下Win10正式版VOL（批量激活）密钥。<br>        Win10正式专业版密钥（32位和64位均可正常使用）：<br>        W269N-WFGWX-YVC9B-4J6C9-T83GX<br>        Win10正式企业版密钥（32位和64位均可正常使用）：<br>        NPPR9-FWDCX-D2C8J-H872K-2YT43<br>    3、利用以上批量激活（VOL）密钥实现永久激活Win10正式版的方法，就是每隔180天重新激活一次。<br>        首先以管理员身份打开“命令提示符”窗口，右击桌面Windows按钮，从其右键菜单中选择“命令提示符（管理员）”项。<br>    4、接着从打开的“命令提示符”窗口中，依次输入以下命令即可完成激活Win10正式版系统：<br>        slmgr.vbs &#x2F;upk<br>        slmgr &#x2F;ipk NPPR9-FWDCX-D2C8J-H872K-2YT43<br>        slmgr &#x2F;skms zh.us.to<br>        slmgr &#x2F;ato</p>
+<p>link:<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows-server/get-started/kms-client-activation-keys">https://learn.microsoft.com/zh-cn/windows-server/get-started/kms-client-activation-keys</a></p>
+<p>方法二<br>    1、利用KMS Win激活工具来激活Win正式版系统。<br>        解压此激活工具，从中可以看到“企业版”和“专业版”两个版本。	</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/windows%E6%BF%80%E6%B4%BB/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/windows%E6%BF%80%E6%B4%BB/" data-id="clcre41k3001gecvpftmf209f" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-whatweb" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/whatweb/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.116Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>whatweb<br>whatweb 是kali中网站指纹识别的工具，使用Ruby语言开发。whatweb可识别web技术，包括内容管理系统(CMS)、博客平台、统计&#x2F;分析包、JavaScript库，Web服务器和嵌入式设备等。它有超过900个插件，每个插件都能识别不同的东西。Whatweb还可以识别版本号，电子邮件地址、账户ID、Web框架模块，SQL错误等。</p>
+<p>WhatWeb可以隐秘、快速、彻底或缓慢扫描。WhatWeb支持攻击级别来控制速度和可靠性之间的权衡。当在浏览器中访问网站时，该交易包含许多关于Web技术为该网站提供支持的提示。有时，单个网页访问包含足够的信息来识别网站，但如果没有，WhatWeb可以进一步询问网站。默认的攻击级别称为“被动”，速度最快，只需要一个网站的HTTP请求。这适用于扫描公共网站。在渗透测试中开发了更积极的模式。</p>
+<p>使用方法</p>
+<p>whatweb  域名</p>
+<pre><code>-i 指定要扫描的文件
+
+-v 详细的显示扫描的结果
+
+-a 指定运行级别
+
+例子：
+
+单个url查询（只看结果）
+</code></pre>
+<p>whatweb <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+<pre><code>批量查询（只看结果）
+</code></pre>
+<p>whatweb -i  .&#x2F;target.txt</p>
+<pre><code>target.txt里面是多个url列表 #开头的url 表示跳过该域名的扫描
+</code></pre>
+<p>详细信息扫描</p>
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/whatweb/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/whatweb/" data-id="clcre41k2001eecvp4yp452cb" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-vulnhub" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/vulnhub/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:29.114Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>vulnhub搭建<br>1、环境<br>    1、本地<br>        首先安装虚拟机<br>            Ubuntu<br>            Cent Os<br>    2、服务器<br>        直接安装docker</p>
+<p>2、	安装docker （ubuntu）<br>    apt install	docker.io<br>    apt install python-pip |python3-pip<br>    pip install docker-compose</p>
+<p>3、下载vulnhub<br>    wget <a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub/archive/master.zip">https://github.com/vulhub/vulhub/archive/master.zip</a> -O vulhub.zip<br>    因为墙的原因，所以可能断连 多试几次就行<br>    使用unzip解压<br>        unzip vulnhub.zip</p>
+<p>4、启动漏洞环境<br>    cd 切换到漏洞路径下<br>    docker-compose up -d 即可启动漏洞环境</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/vulnhub/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/vulnhub/" data-id="clcre41k3001fecvp8l92eqov" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AV/">AV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Domain/">Domain</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IPC/">IPC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/">Intranet</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/IPC/">IPC</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AV/" rel="tag">AV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Domain/" rel="tag">Domain</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AV/" style="font-size: 10px;">AV</a> <a href="/tags/Domain/" style="font-size: 10px;">Domain</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/MS17-010">MS17-010</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/zzcms%E6%BC%8F%E6%B4%9E/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/zzcms%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/ZimbraNote/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 两袖空空<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

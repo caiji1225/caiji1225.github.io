@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>空空随笔</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="好记性不如烂笔头，主要用于工作，学习中的随手记录">
+<meta property="og:type" content="website">
+<meta property="og:title" content="空空随笔">
+<meta property="og:url" content="http://example.com/page/4/index.html">
+<meta property="og:site_name" content="空空随笔">
+<meta property="og:description" content="好记性不如烂笔头，主要用于工作，学习中的随手记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="两袖空空">
+<meta property="article:tag" content="笔记 , 研究 , 漏洞">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="空空随笔" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">空空随笔</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">随手记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Kerberos" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/Kerberos/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.715Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Windows 认证<br>.&#x2F;Kerberos.jpg</p>
+<p>认证协议（两种	）<br>    NTLM （NT LAN Manager）	（质询&#x2F;应答）消息交互模式<br>        用于wind 2000 及之后的 工作组环境</p>
+<pre><code>Kerberos	（双向认证）
+    用于win 2000 及之后的 域环境
+    来源 希腊神话，冥界守护神兽，三头的怪兽，寓意着认证过程涉及三方：客户端、服务端、KDC（Key Distribution Center 秘钥分发中心 ）
+    域环境中 KDC 由DC 肩负
+    是一种基于票据的认证方式（Ticket）
+</code></pre>
+<p>区别：<br>    Kerberos 更安全、高效，且认证过程更复杂。</p>
+<p>Kerberos工作原理	（双向认证模式）</p>
+<pre><code>客户端要访问服务器的资源，需先购买服务端认可的票据。等待服务验票之后才能入场。
+但是这张票不能直接购买，需要一张认购权证(TGT)。
+客户端在买票之前需要预先获得一张认购权证。这张认购权证和进入服务器的入场券均有KDC发售
+</code></pre>
+<p>认购权证（TGT）获得	（步骤1、2）<br>    TGT 属于KDC的认证服务<br>    用户使用域用户登录某主机时，用户本机Kerberos服务向KDC的认证服务发送认证请求（该请求包含两部分：明文形式的用户名、加密用于证明访问者身份的Authenticator）<br>    KDC收到请求后，通过AD（account database）获取该用户信息，通过获取的密码信息生成一个秘钥对Authenticator进行解密，根据解密后的内容和已知是否一致，从而确认登录者身份<br>    KAS成功认证后，生成一个用于确保该用户和KDC通信安全的会话密钥（Logon Session Key），并采用该用户密码派生的秘钥进行加密<br>    接着KAS为该用户创建认购权证 （TGT）（包含两方面：用户相关信息、Logon Session Key），整个TGT通过KDC自己的秘钥进行加密，最终不同秘钥加密的Logon Session Key 和TGT被返回给客户端</p>
+<p>通过认购权证（TGT）获得入场卷（步骤3、4）<br>    客户端获得购买进入同域主机入场卷的认购凭证（ TGT），以及Logon Session Key后，缓存本地<br>    凭借TGT向KDC购买入场卷（即服务票据ST：Service Ticket）<br>    客户端向TGS（Ticket Granting Service）发送ST购买请求。（请求包含：客户端用户名；通过Logon Session Key加密的Authenticator；TGT和访问的服务器名）<br>    TGS收到请求后，通过自己的秘钥解密TGT并获取Logon Session Key，通过Logon Session Key解密Authenticator，确认对方身份<br>    身份确认后，TGS生成一个用于客户端和服务器之通信安全的会话密钥（Service Session Key），该会话秘钥通过Logon Session Key加密，<br>    然后出售给客户端需要的入场卷（ST 包含两方面：客户端用户信息和Service Session Key），整个ST通过服务器密码派生的秘钥进行加密<br>    最终两个被加密的Service Session Key 和ST返回给客户端</p>
+<p>凭票入场<br>    客户端收到TGS回复后，通过缓存的Logon Seesion Key解密得到Service Session Key，同时得到了服务器入场券ST，且缓存Service Session Key到本地<br>    服务器在收到ST后，确认，予以放行。<br>    如何确认：是服务器收到ST时还附带了一份通过Service Session Key加密的Authenticator<br>        因为ST是通过服务器密码派生的秘钥加密的，所以服务器收到ST时，通过自己的密码派生秘钥进行ST的解密，从中提取Service Session Key<br>        通过提取出来的Service Session Key 进行解密Authenticator。从而验证身份确认ST不是伪造的<br>    服务器对客户端的认证已完成，开始客户端对服务器的认证（双向认证）<br>    服务器将解密后的AUthenticator再次用Service Session Key加密发送给客户端<br>    客户端用缓存的Service Session Key进行解密，和已知做对比，从而证明访问的服务器和自己拥有的Service Session Key 相同（步骤5、6）</p>
+<p>例：使用域账户登录域主机，访问另一台域主机，如果对访问和被访问者进行双向身份验证</p>
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/Kerberos/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/Kerberos/" data-id="clcre41jg000becvpaa2kaics" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-InfoCollect" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/InfoCollect/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.560Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1、域名信息收集（域名注册信息、DNS服务器信息）<br>​	whois查询	（注册人的详细信息）<br>    爱站网 whois 查询：<a target="_blank" rel="noopener" href="https://whois.aizhan.com/">https://whois.aizhan.com/</a><br>​	站长之家：<a target="_blank" rel="noopener" href="http://whois.chinaz.com/">http://whois.chinaz.com</a><br>​	whois Lookup: <a target="_blank" rel="noopener" href="http://whois.domaintools.com/">http://whois.domaintools.com/</a><br>​	DNS信息查询：<a target="_blank" rel="noopener" href="http://toolbar.netcraft/">http://toolbar.netcraft</a><br>​	Netcraft Site Report 显示目标网站上使用的技术：<a target="_blank" rel="noopener" href="http://toolbar.netcraft.com/site_report?url=">http://toolbar.netcraft.com/site_report?url=</a><br>​	Robtex DNS 查询显示关于目标网站的全面的DNS信息：<a target="_blank" rel="noopener" href="https://www.robtex.com/">https://www.robtex.com/</a><br>​	全球Whois查询：<a target="_blank" rel="noopener" href="https://www.whois365.com/cn/">https://www.whois365.com/cn/</a><br>​	站长工具爱站查询：<a target="_blank" rel="noopener" href="https://whois.aizhan.com/">https://whois.aizhan.com/</a><br>​	阿里万网：<a target="_blank" rel="noopener" href="https://whois.aliyun.com/">https://whois.aliyun.com</a> </p>
+<pre><code>信息反查		
+    注册反查：http://whois.chinaz.com/reverse?ddlSearchMode=2
+    邮箱反查：http://whois.chinaz.com/reverse?ddlSearchMode=1
+    电话反查：http://whois.chinaz.com/reverse?ddlSearchMode=3
+</code></pre>
+<p>2、旁站、同服站点<br>    1、在线平台<br>        <a target="_blank" rel="noopener" href="http://stool.chinaz.com/same">http://stool.chinaz.com/same</a><br>        <a target="_blank" rel="noopener" href="https://www.webscan.cc/">https://www.webscan.cc</a><br>        <a target="_blank" rel="noopener" href="http://www.bug8.me/bing/bing.php">http://www.bug8.me/bing/bing.php</a><br>    2、工具<br>        httpscan：<a target="_blank" rel="noopener" href="https://github.com/zer0h/httpscan">https://github.com/zer0h/httpscan</a><br>        小米范 web 查找器<br>        Goby：<a target="_blank" rel="noopener" href="https://gobies.org/">https://gobies.org/</a><br>        bufferfly：<a target="_blank" rel="noopener" href="https://github.com/dr0op/bufferfly">https://github.com/dr0op/bufferfly</a><br>        cscan：<a target="_blank" rel="noopener" href="https://github.com/z1un/cscan">https://github.com/z1un/cscan</a></p>
+<p>2、子域名信息收集</p>
+<p>​	1、搜索引擎</p>
+<p>​	2、在线工具<br>​		DNSdumpster：<a target="_blank" rel="noopener" href="https://dnsdumpster.com/">https://dnsdumpster.com/</a><br>​		whois反查：<a target="_blank" rel="noopener" href="http://whois.chinaz.com/">http://whois.chinaz.com/</a><br>​		virustotal：<a target="_blank" rel="noopener" href="http://www.virustotal.com/">www.virustotal.com</a><br>​		子域名爆破：<a target="_blank" rel="noopener" href="https://phpinfo.me/domain/">https://phpinfo.me/domain/</a><br>​		IP反查绑定域名：<a target="_blank" rel="noopener" href="http://dns.aizhan.com/">http://dns.aizhan.com/</a><br>​		<a target="_blank" rel="noopener" href="https://hackertarget.com/find-dns-host-records/">https://hackertarget.com/find-dns-host-records/</a><br>​				<a target="_blank" rel="noopener" href="https://site.ip138.com/">https://site.ip138.com</a><br>        潮汐指纹 <a target="_blank" rel="noopener" href="http://finger.tidesec.com/">http://finger.tidesec.com/</a><br>                <a target="_blank" rel="noopener" href="https://reverseip.domaintools.com/">https://reverseip.domaintools.com/</a><br>        微步社区 <a target="_blank" rel="noopener" href="https://x.threatbook.cn/">https://x.threatbook.cn/</a><br>        站长工具 <a target="_blank" rel="noopener" href="http://tool.chinaz.com/subdomain/">http://tool.chinaz.com/subdomain/</a></p>
+<pre><code>3、证书透明度公开日志枚举子域名
+    crt.sh： https://crt.sh
+    censys：https://censys.io
+    https://transparencyreport.google.com/https/certificates
+    https://developers.facebook.com/tools/ct/
+        
+    枚举子域名工具（kali）
+        Dnsenum 域名信息收集
+        Dnsmap 收集信息和枚举DNS信息
+        Dnsrecon 用于DNS侦查
+        Fierce 子域名查询 (可以测试域传递收集子域名 没有的话采用爆破的方式)
+            exp: fierce --domain xxx.xxx.xx
+        域传递
+        nmap
+            nmap --script dns-zone-transfer --script-args dns-zone-transfer.domain=xxx.edu.cn -p 53 -Pn dns.xxx.edu.cn
+            # --script dns-zone-transfer 表示加载 nmap 漏洞检测脚本 dns-zone-transfer.nse，扩展名.nse 可省略
+            # --script-args dns-zone-transfer.domain=xxx.edu.cn 向脚本传递参数，设置列出某个域中的所有域名
+            # -p 53 设置扫描 53 端口
+        Linux dig 命令进行测试
+            dig xxx.com ns
+            # 对目标发送一个 ns 类的解析请求来判断其 DNS 服务器
+            dig axfr @dns xxx.com
+            # 对目标发起 axfr 请求，获取其域内所有的域名
+    windows
+        layer
+        subDomainsBrute
+            https://github.com/lijiejie/subDomainsBrute
+        ctfr：https://github.com/UnaPibaGeek/ctfr	
+</code></pre>
+<p>​			K8<br>            Sublist3r<br>            Maltego<br>            OneForAll：<a target="_blank" rel="noopener" href="https://github.com/shmilylty/OneForAll">https://github.com/shmilylty/OneForAll</a><br>        第三方聚合发现子域名<br>        Sublist3r：<a target="_blank" rel="noopener" href="https://github.com/aboul3la/Sublist3r">https://github.com/aboul3la/Sublist3r</a><br>        OneForAll：<a target="_blank" rel="noopener" href="https://github.com/shmilylty/OneForAll">https://github.com/shmilylty/OneForAll</a></p>
+<p>3、备案信息查询：</p>
+<p>​	ICP&#x2F;IP地址&#x2F;域名信息备案管理系统：<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/publish/query/indexFirst.action">http://beian.miit.gov.cn/publish/query/indexFirst.action</a></p>
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/InfoCollect/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/InfoCollect/" data-id="clcre41jf0009ecvpc0la81ny" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Google" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/Google/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.540Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>google hack</p>
+<p>site: 域名</p>
+<p>​	exp:site:<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></p>
+<p>intext: 正文中的关键字的网页</p>
+<p>​	exp: intext:登陆</p>
+<p>​	<a target="_blank" rel="noopener" href="http://china-ece.com/manage/Admin_ChkLogin.asp">http://china-ece.com/manage/Admin_ChkLogin.asp</a></p>
+<p>​	江苏省有色金属华东地质勘查局</p>
+<p>intitle：标题中存在的关键字</p>
+<p>​	intitle:”index of” filetype:sql</p>
+<p>info: 一些基本信息</p>
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/Google/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/Google/" data-id="clcre41je0007ecvp2jldbawb" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Github" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/Github/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.524Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1、资源管理器 （使用Github提供的GraphQL来查询用户邮箱）<br>    <a target="_blank" rel="noopener" href="https://docs.github.com/cn/graphql/overview/explorer">https://docs.github.com/cn/graphql/overview/explorer</a><br>{<br>  repository(name: “grank”, owner: “lctt”) {<br>    ref(qualifiedName: “master”) {<br>      target {<br>        … on Commit {<br>          id<br>          history(first: 5) {<br>            edges {<br>              node {<br>                author {<br>                  name<br>                  email<br>                }<br>              }<br>            }<br>          }<br>        }<br>      }<br>    }<br>  }<br>}<br>    并将 name 替换为你要查询的人的 repo 名，owner 改为你需要查询的人的名字，然后点击执行按钮。<br>    一种是我们常见的，自己用的各种免费邮箱，比如 @qq.com、@gmail.com、@foxmail.com 之类的；<br>    另一种是形如 27856297+dependabot-preview[bot]@users.noreply.github.com 这样的邮箱<br>    前者是我们自己通过 git 设置的邮箱，而后者则是我们通过 Github 网页、 API 操作产生的 commit<br>    你在查询的时候，要记得去找第一类邮箱来作为参考</p>
+<p>2、直接留言问<br>    直接在repository提issue</p>
+<p>3、查看作者简介</p>
+<p>4、查看项目提交<br>    加 .patch<br>5、git log</p>
+<pre><code># 这里的地址改成你要联系作者的仓库地址
+git clone https://github.com/xxx/xxxx.git
+然后cd到下载的目录下面
+具体的可以先
+# 查看目录
+ls
+然后进入目录
+cd K-means-and-Fuzzy-C-means/
+最后输入
+git log
+</code></pre>
+<p>6、Github API<br>    API 1<br>    <a target="_blank" rel="noopener" href="https://api.github.com/users/">https://api.github.com/users/</a><name>&#x2F;events&#x2F;public<br>    将在<name>替换为作者的名字<br>    API 2<br>    <a target="_blank" rel="noopener" href="https://api.github.com/users/authorname/events/public">https://api.github.com/users/authorname/events/public</a><br>    <a target="_blank" rel="noopener" href="https://api.github.com/users/zmike1993/events">https://api.github.com/users/zmike1993/events</a><br>    <a target="_blank" rel="noopener" href="https://api.github.com/users/zmike1993/events/public">https://api.github.com/users/zmike1993/events/public</a></name></name></p>
+<pre><code>CTRL + f 搜索email
+</code></pre>
+<h3 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h3><pre><code>-  [issues 文章](https://github.com/zmike1993/hello-world/issues)
++  [issues文章](https://github.com/zmike1993/hello-world/issues) 
++  [Discussions文章](https://github.com/zmike1993/hello-world/discussions)
++  [Wiki文章](https://github.com/zmike1993/hello-world/wiki
+</code></pre>
+<p>7、events_url:<br>    <a target="_blank" rel="noopener" href="https://api.github.com/repos/zmike1993/hello-world/issues/130/events">https://api.github.com/repos/zmike1993/hello-world/issues/130/events</a></p>
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/Github/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/Github/" data-id="clcre41ja0003ecvp4jmk1gsr" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-firefox脏数据" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/firefox%E8%84%8F%E6%95%B0%E6%8D%AE/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.522Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>方法一<br>针对火狐浏览器的解决方法</p>
+<p>1.在firefox（火狐浏览器）地址栏中输入：</p>
+<p>about:config</p>
+<p>2.然后出现搜索框，搜索以下内容，双击将它设置成false。</p>
+<p>network.captive-portal-service</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/firefox%E8%84%8F%E6%95%B0%E6%8D%AE/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/firefox%E8%84%8F%E6%95%B0%E6%8D%AE/" data-id="clcre41jp000recvp9ojp9apj" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-domains" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/domains/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.505Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>subDomainsBrute<br>    <a target="_blank" rel="noopener" href="https://github.com/lijiejie/subDomainsBrute">https://github.com/lijiejie/subDomainsBrute</a><br>        Usage: subDomainsBrute.py [options] target.com</p>
+<pre><code>    Options:
+      --version             show program&#39;s version number and exit
+      -h, --help            show this help message and exit
+      -f FILE               File contains new line delimited subs, default is
+                            subnames.txt.
+      --full                Full scan, NAMES FILE subnames_full.txt will be used
+                            to brute
+      -i, --ignore-intranet
+                            Ignore domains pointed to private IPs
+      -w, --wildcard        Force scan after wildcard test failed
+      -t THREADS, --threads=THREADS
+                            Num of scan threads, 500 by default
+      -p PROCESS, --process=PROCESS
+                            Num of scan process, 6 by default
+      --no-https            Disable get domain names from HTTPS cert, this can
+                            save some time
+      -o OUTPUT, --output=OUTPUT
+                            Output file name. default is &#123;target&#125;.txt
+</code></pre>
+<p>OneForAll<br>    <a target="_blank" rel="noopener" href="https://github.com/shmilylty/OneForAll">https://github.com/shmilylty/OneForAll</a></p>
+<pre><code>Example:
+    python3 oneforall.py version
+    python3 oneforall.py check
+    python3 oneforall.py --target example.com run
+    python3 oneforall.py --targets ./domains.txt run
+    python3 oneforall.py --target example.com --alive False run
+    python3 oneforall.py --target example.com --brute False run
+    python3 oneforall.py --target example.com --port medium run
+    python3 oneforall.py --target example.com --fmt csv run
+    python3 oneforall.py --target example.com --dns False run
+    python3 oneforall.py --target example.com --req False run
+    python3 oneforall.py --target example.com --takeover False run
+    python3 oneforall.py --target example.com --show True run
+</code></pre>
+<p>ksubdomain<br>    <a target="_blank" rel="noopener" href="https://github.com/knownsec/ksubdomain/releases">https://github.com/knownsec/ksubdomain/releases</a></p>
+<pre><code># 使用内置字典爆破
+ksubdomain -d baidu.com
+
+# 使用字典爆破域名
+ksubdomain -d baidu.com -f subdomains.dict
+
+# 字典里都是域名，可使用验证模式
+ksubdomain -f dns.txt -verify
+
+# 爆破三级域名
+ksubdomain -d baidu.com -l 2
+</code></pre>
+<p>Sublist3r<br>    <a target="_blank" rel="noopener" href="https://github.com/aboul3la/Sublist3r">https://github.com/aboul3la/Sublist3r</a></p>
+<pre><code>python sublist3r.py -b -d baidu.com
+    -d -domain要枚举子域的域名
+    -b -bruteforce启用subbrute bruteforce模块
+    -p -ports根据特定的tcp端口扫描找到的子域
+    -v --verbose启用详细模式并实时显示结果
+    -t -threads用于subbrute bruteforce的线程数
+    -e - 引擎指定逗号分隔的搜索引擎列表
+    -o -output将结果保存到文本文件
+    -h -help显示帮助信息并退出
+    
+</code></pre>
+
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/domains/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/domains/" data-id="clcre41jo000pecvp31ux347x" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-dnsrecon" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/dnsrecon/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.483Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>dnsrecon<br>    查询DNS服务器返回的记录不会触发IDS、IPS等设备即可获取网络设施的相关信息<br>    大部分企业不会监控DNS服务器的，只监控是否存在区域传输漏洞<br>功能点：<br>    1、区域传输	zone Transfer<br>    2、反向查询	Reverse Lookup<br>    3、暴力猜解	Domain and Host Brute-Foce<br>    4、标准记录枚举	Standard Record Enumeration (wildcard,SOA,MX,A,TXT,etc)<br>    5、缓存窥探	Cache Snooping<br>    6、区域遍历	Zone Walking<br>    7、Google查询	Google Lookup</p>
+<p>参数：<br>-h, –help	帮助信息<br>-d, –doamin		域名信息<br>-n,	–name_server 要使用的域名服务器 默认使用目标的SOA，多个服务器可以使用 “,” 分隔的列表指定<br>-r, –range	给定的IP范围进行域名反查  first-last | range |bitmask<br>-D， –dictionary	用来遍历或者爆破的子域名与主机名的字典文件<br>-f  保存时 忽略枚举域查找的结果<br>-a 在标准枚举过程中进行AXFR（完全区域传送）测试<br>-s 在标准的枚举过程中进行IP地址范围的反向查找<br>-b 在标准枚举过程中进行bing枚举<br>-g 在标准枚举过程中进行Google枚举<br>-y 在标准枚举过程中进行Yandex枚举<br>-k 在标准枚举过程中进行crt.sh枚举<br>-w 在标准枚举的过程中进行深度的whois查询和IP反查<br>-z 在标准枚举的过程中进行DNSSEC域漫游<br>–threads 指定线程数<br>–lifetime	指定查询等待的时间<br>–tcp 使用tcp协议进行查询<br>–db +filename 将结果存储为sqlite3数据库的文件<br>–xml +filename 将结果存储为XML格式的文件<br>-c, –csv +filename 将结果保存到csv格式的文件<br>-j, –json +filename 将结果保存到json格式的文件<br>–iw 继续强制执行域，即使发现了通配符记录<br>-disable_check_recursion 禁用same服务器上的递归查询<br>–disable_check_bindversion 禁用same服务器上的绑定版本查询<br>-V 显示dnsrecon的版本<br>-v 详细的启用信息<br>-t, –type	指定枚举类型<br>    std	如果NS服务器的域传递失败，进行SOA、NS、A、AAAA、MX 和SRV的枚举（必须使用-d参数指定域名才可使用此参数）<br>    rvl 对给定的IP范围或者CIDR进行反向查找（必须使用-r指定IP范围）<br>    brt 使用指定的字典爆破域名和主机名<br>    srv 枚举srv记录<br>    axfr 对所有的NS服务器进行域传递测试<br>    goo 对子域名和host进行Google搜索<br>    snoop 对 -d 选项给出的文件进行DNS服务器缓存侦测<br>    tld 删除给定域的TLD并测试在IANA中注册的所有TLD<br>    zonewalk 使用NSEC记录进行DNS SEC域漫游</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/dnsrecon/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/dnsrecon/" data-id="clcre41jl000mecvp5ie960sf" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-dnsenum" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/dnsenum/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T15:12:28.463Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>dnsenum nzsis.govt.nz</p>
+<p>A 记录	表示域名或者主机名对应的IPV4的记录<br>NS 记录	指定了子域对应的域名服务器<br>MX 记录	是域名与邮件交换服务器的对应记录</p>
+<p>此命令会尝试从名字服务器进行完全区域传输，但可能会因为名字服务器对区域传输做限制导致失败<br>在 ：<br>Trying zone Transfers and getting Bind Versions：</p>
+<p>显示的内容就是。</p>
+<p>区域传送： DNS分为 主、从服务器。从服务器向主服务器查询更新信息，主服务器将本级的区域文件的数据传递给从服务器，此过程称为区域传送<br>区域传送分为<br>    完全区域传送 （AFXR） 和增量区域传送 （IXFR）<br>        AFXR：主服务器将区域文件中的所有数据传递给从服务器<br>        IXFR：主服务器将区域文件中更新的部分传递给从服务器</p>
+<p>查询<br>指定DNS服务器查询<br>dnsenum –dnsserver 114.114.114.114  nzsis.govt.nz<br>    kali 默认服务器在&#x2F;etc&#x2F;resolv.conf 文件中指定<br>    114.114.114.114<br>    8.8.8.8</p>
+<p>–thread 线程</p>
+<p>-t |–timeout 指定TCP或者UDP的超时等待时间 默认10s<br>–nocolor 不设置彩色字体显示结果<br>-v | -verbose 显示查询过程或出错的详细信息</p>
+<p>dns占用53端口，使用TCP或者UDP协议<br>当进行域名解析时，为了使DNS服务器负载更低，响应更快，使用UDP协议；<br>当进行区域传送时，为了保证数据准确性，使用TCP协议</p>
+
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/dnsenum/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/dnsenum/" data-id="clcre41jn000oecvp4991cr57" data-title="" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-dns" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/dns/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T07:20:27.463Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/01/09/dns/">DNS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>DNS<br>    DNS协议是一种请求&#x2F;应答协议，属于应用层的隧道<br>    大量的防御设备的使用导致，传统的socket隧道濒临淘汰，TCP、UDP被拦截<br>    DNS、ICMP、HTTP|HTTPS等协议成为主流<br>    DNS报文具有穿透防火墙的能力，且大量设备不会拦截过滤DNS流量。<br>    DNS协议常用于C&amp;C通信<br>        C&amp;C服务器（Command and Control Server，命令及控制服务器）<br>          C&amp;C节点分为两种 服务端（属于攻击者） 客户端（被控者）</p>
+<p>原理<br>    将其它协议封装在DNS协议中进行传输，通过逐层的DNS服务器进行查询和中转</p>
+<p>1、查询DNS连通性<br>    nslookup hack.com  #先尝试与内部DNS通信，解析内部域名</p>
+<pre><code>nslookup www.baidu.com  #测试内部DNS能否解析外部域名，这代表着能否使用DNS隧道进行隐蔽通信
+</code></pre>
+
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/dns/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/dns/" data-id="clcre41jm000necvp5suecird" data-title="DNS" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ipc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/09/ipc/" class="article-date">
+  <time class="dt-published" datetime="2023-01-09T07:20:27.463Z" itemprop="datePublished">2023-01-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Domain/">Domain</a>►<a class="article-category-link" href="/categories/IPC/">IPC</a>►<a class="article-category-link" href="/categories/Intranet/">Intranet</a>►<a class="article-category-link" href="/categories/Intranet/IPC/">IPC</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/01/09/ipc/">IPC 入侵</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ul>
+<li></li>
+</ul>
+<p>IPC$<br>    IPC$(Internet Process Connection)可以被理解为一种“专用管道”.可以在连接双方建立一条安全的通道，实现对远程计算机的访问。<br>    Windows NT&#x2F;2000&#x2F;XP提供了IPC$功能的同时，在初次安装系统时还打开了默认共享，即所有的逻辑共享(C$,D$,E$……)和系统目录(ADMIN$)共享。<br>    所有这些共享的目的，都是为了方便管理员的管理，但在有意无意中，导致了系统安全性的隐患<br>    Windows XP安装后的默认共享方式就是”仅来宾”的方式。<br>    利用IPC$,连接者甚至可以与目标主机建立一个空的连接而无需用户名与密码(对方机器开了ipc$共享,否则连接不上的)<br>    而利用这个空的连接，连接者还可以得到目标主机上的用户列表(管理员会禁止导出用户列表的)。<br>    以空连接登陆时,没有任何权限,以用户或管理员的身份登陆时,你就会有相应的权限</p>
+<p>错误号 5 ，拒绝访问：很可能你使用的用户不是管理员权限的；<br>错误号 51 ， Windows 无法找到网络路径：网络有问题；<br>错误号 53 ，找不到网络路径： ip 地址错误；目标未开机；目标 lanmanserver 服务未启动；目标有防火墙（端口过滤）；<br>错误号 67 ，找不到网络名：你的 lanmanworkstation 服务未启动或者目标删除了 ipc$ ；<br>错误号 1219 ，提供的凭据与已存在的凭据集冲突：你已经和对方建立了一个 ipc$ ，请删除再连；<br>错误号 1326 ，未知的用户名或错误密码：原因很明显了；<br>错误号 1792 ，试图登录，但是网络登录服务没有启动：目标 NetLogon 服务未启动；<br>错误号 2242 ，此用户的密码已经过期：目标有帐号策略，强制定期要求更改密码。</p>
+<p>查看本地共享<br>net share </p>
+<p>删除共享<br>net share C$ &#x2F;del</p>
+<p>关闭共享<br>net stop server &#x2F;y  (重启会自动开启)<br>建立空连接<br>    net use \10.61.10.130\ipc$ &#x2F;user:”” “”</p>
+<p>建立IPC$ 连接<br>    net use \10.61.10.130\ipc$ “”  &#x2F;user:””<br>查看远程主机的时间<br>    net time \10.61.10.130</p>
+<p>查看远程主机的共享服务 (看不见默认共享的)<br>    net view \10.61.10.130</p>
+<p>远程主机映射<br>    net user z: \10.61.10.130\c$<br>    成功后 你的Z盘就是130主机的C盘</p>
+<p>删除映射盘<br>    net use z: &#x2F;del</p>
+        
+          <p class="article-more-link">
+            <a href="/2023/01/09/ipc/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/ipc/" data-id="clcre41jr000tecvp70a107bu" data-title="IPC 入侵" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Domain/" rel="tag">Domain</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AV/">AV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Domain/">Domain</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IPC/">IPC</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/">Intranet</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Intranet/IPC/">IPC</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AV/" rel="tag">AV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Domain/" rel="tag">Domain</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AV/" style="font-size: 10px;">AV</a> <a href="/tags/Domain/" style="font-size: 10px;">Domain</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/MS17-010">MS17-010</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/%E5%BC%BA%E8%A1%8C%E6%94%B9%E5%BC%80%E6%9C%BA%E5%AF%86%E7%A0%81/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/zzcms%E6%BC%8F%E6%B4%9E/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/zzcms%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/09/ZimbraNote/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 两袖空空<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
